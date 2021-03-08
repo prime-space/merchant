@@ -1,0 +1,7 @@
+description:
+  payout: 'Выплата через %method% на %reciever%'
+  payoutSet: 'Выплата через %method% на %reciever%'
+  payoutReturn: 'Возврат неудачной части выплаты #%payoutSetId%'
+  payment: 'Продажа по магазину %shopName%'
+  voucher:
+    payment: 'Применение ваучера на возврат средств по заказу: #%paymentId%'

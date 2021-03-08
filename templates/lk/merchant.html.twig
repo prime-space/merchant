@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="app">
+        <div v-cloak>
+            <v-app id="inspire">
+                <v-navigation-drawer
+                        fixed
+                        v-model="drawer"
+                        app
+                >
+                    <v-list dense>
+                        <v-container class="vContainerNoPadding">
+                            <v-layout row>
+                                <v-flex xs8>
+                                    <v-list-tile @click="signOut">
+                                        <v-list-tile-action>
+                                            <v-icon>directions_run</v-icon>
+                                        </v-list-tile-action>
+                                        <v-list-tile-content>
+                                            <v-list-tile-title>Выйти</v-list-tile-title>
+                                        </v-list-tile-content>
+                                    </v-list-tile>
+                                </v-flex>
+                                <v-flex xs4 text-xs-center class="idBox">ID: {{ userId }}</v-flex>
+                            </v-layout>
+                        </v-container>
+                        <v-divider></v-divider>
+                        <template v-for="section in sections">
+                            <v-list-tile v-if="section.isOnNavigationBar" :key="section.id" @click="setSection" :to="'/'+section.route">
+                                <v-list-tile-action>
+                                    <v-icon>{{ '{{ ' }} section.icon {{ '}}' }}</v-icon>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title>{{ '{{ ' }} section.name {{ '}}' }}</v-list-tile-title>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                            <v-list-tile v-if="section.id === 5" href="/doc" target="_blank">
+                                <v-list-tile-action>
+                                    <v-icon>info</v-icon>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title>{{ '{{ ' }} translate('menuDoc') {{ '}}' }}</v-list-tile-title>
+                                </v-list-tile-content>
+                            </v-list-tile>
+
+                            <v-divider v-if="section.id === 4 || section.id === 5"></v-divider>
+                        </template>
+                    </v-list>
+                </v-navigation-drawer>
+                <v-toolbar color="indigo" dark fixed app>
+                    <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+                    <v-toolbar-title>{{ '{{ ' }} sectionName {{ '}}' }}</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-form id="lkModeForm" method="post" action="/private/lkMode/purse" @submit.prevent="submitLkModeForm">
+                        <v-text-field style="display:none;" name="_token" value="{{ token }}"></v-text-field>
+                        <v-tooltip left>
+                            <v-btn flat icon large slot="activator" color="white lighten-2" @click="submitLkModeForm">
+                                <v-icon>fa-money-check-alt</v-icon>
+                            </v-btn>
+                            <span>Перейти в кошелек</span>
+                        </v-tooltip>
+                    </v-form>
+                </v-toolbar>
+                <v-content>
+                    <v-container fluid>
+                        <router-view></router-view>
+                    </v-container>
+                </v-content>
+                <v-footer color="indigo" app>
+                    <span class="white--text">&nbsp;{{ siteName }} &copy; {{ year }}</span>
+                </v-footer>
+                <v-snackbar :timeout="6000" :top="'top'" v-model="snackbar" :color="snackbarColor">
+                    <div>{{ '{{ ' }} snackbarText {{ '}}' }}</div>
+                    <v-btn flat @click.native="snackbarHide()">X</v-btn>
+                </v-snackbar>
+            </v-app>
+        </div>
+        <div class="background" v-if="!$data">
+            <div class="sk-folding-cube">
+                <div class="sk-cube1 sk-cube"></div>
+                <div class="sk-cube2 sk-cube"></div>
+                <div class="sk-cube4 sk-cube"></div>
+                <div class="sk-cube3 sk-cube"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block title %}Личный кабинет{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
+    <link rel="stylesheet" href="/inc/admin.css?{{ version }}">
+    <link href="/inc/vuetify-1.5.7.min.css" rel="stylesheet">
+    <link href="/inc/roboto-material.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/inc/vue-2.6.10.min.js"></script>
+    <script src="/inc/vuetify-1.5.7.min.js"></script>
+    <script src="/inc/chart-2.7.1.min.js"></script>
+    <script src="/inc/vue-chartjs.min.js"></script>
+    <script>var config = JSON.parse('{{ jsConfig|raw }}');</script>
+    <script src="/inc/admin.js?{{ version }}"></script>
+{% endblock %}

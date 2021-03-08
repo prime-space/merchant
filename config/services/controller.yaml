@@ -1,0 +1,111 @@
+services:
+    App\Controller\IndexController:
+        tags: ['controller.service_arguments']
+        arguments:
+        - '@App\Authenticator'
+        - '@ewll.db.repository-provider'
+        - '@App\Accountant'
+        - '@App\CaptchaProvider'
+        - '@App\IpControlAttemptProvider'
+        - '@translator'
+        - '@App\TelegramSender'
+        - '@App\VueViewCompiler'
+        - '%app_key%'
+        - '%site_name%'
+        - '%domain%'
+        - '%proxies%'
+        - '@App\Recaptcha'
+        - '@App\PaymentRefunder'
+
+    App\Controller\ShopController:
+        tags: ['controller.service_arguments']
+        arguments:
+         - '@App\Authenticator'
+         - '@ewll.db.repository-provider'
+         - '@translator'
+         - '@App\AdminApi'
+         - '@ewll.db.client.default'
+         - '@App\PaymentDayStatisticCounter'
+         - '@App\VueViewCompiler'
+
+    App\Controller\PaymentController:
+        tags: ['controller.service_arguments']
+        arguments:
+        - '@App\Authenticator'
+        - '@ewll.db.repository-provider'
+        - '@translator'
+        - '@App\ChartDataCompiler'
+        - '@App\PaymentRefunder'
+
+    App\Controller\UserController:
+        tags: ['controller.service_arguments']
+        arguments:
+        - '@App\Authenticator'
+        - '@ewll.db.repository-provider'
+
+    App\Controller\PayoutController:
+        tags: ['controller.service_arguments']
+        arguments:
+        - '@App\Authenticator'
+        - '@ewll.db.repository-provider'
+        - '@translator'
+        - '@App\VueViewCompiler'
+        - '@App\TagServiceProvider\TagServiceProvider'
+        - !tagged payment_system_manager
+        - '@App\Accountant'
+        - '@App\Form\Extension\Core\DataTransformer\PayoutMethodCodeToIdTransformer'
+
+    App\Controller\MerchantController:
+        tags: ['controller.service_arguments']
+        arguments:
+            - '@logger'
+            - '@form.factory'
+            - '@ewll.db.repository-provider'
+            - '@translator'
+            - '@App\PaymentAccountFetcher'
+            - '@App\TagServiceProvider\TagServiceProvider'
+            - !tagged payment_system_manager
+            - '@App\MessageBroker'
+            - '@App\CurrencyConverter'
+            - '@ewll.db.client.default'
+            - '@App\FeeFetcher'
+            - '@App\VueViewCompiler'
+            - '@App\Mailer'
+            - '%email_address_claims%'
+            - '@App\PaymentDayStatisticCounter'
+            - '@App\PostbackManager'
+            - '@App\PaymentSystemManager\YandexManager'
+
+    App\Controller\AdminApiController:
+        tags: ['controller.service_arguments']
+        arguments: ['@App\AdminApi', '%env(ADMIN_API_SECRET)%', '@App\VueViewCompiler']
+
+    App\Controller\ClientApiController:
+        tags: ['controller.service_arguments']
+        arguments: ['@App\Authenticator', '@App\ClientApi', '@ewll.db.repository-provider']
+
+    App\Controller\SettingsController:
+        tags: ['controller.service_arguments']
+        arguments: ['@ewll.db.repository-provider', '@translator', '@App\Authenticator', '@App\VueViewCompiler']
+
+    App\Controller\TransactionController:
+        tags: ['controller.service_arguments']
+        arguments:
+            - '@ewll.db.repository-provider'
+            - '@translator'
+            - '@App\Authenticator'
+            - '@App\TagServiceProvider\TagServiceProvider'
+            - !tagged transaction_method
+            - '@App\Transaction\Method\PayoutTransactionMethod'
+            -
+    App\Controller\VoucherController:
+        tags: ['controller.service_arguments']
+        arguments:
+            - '@ewll.db.repository-provider'
+            - '@App\Authenticator'
+            - '@App\VueViewCompiler'
+            - '@App\MessageBroker'
+
+    App\Controller\TicketController:
+        tags: ['controller.service_arguments']
+        arguments: ['@App\Authenticator', '@ewll.db.repository-provider', '@App\AdminApi', '@ewll.db.client.default', '@translator', '@App\VueViewCompiler']

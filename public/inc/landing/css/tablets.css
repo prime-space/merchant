@@ -1,0 +1,307 @@
+@charset "utf-8"; @media screen and (max-width: 1366px) and (min-width: 768px) {
+    .menu {
+        margin: 0px auto 100px auto;
+        padding: 20px 0;
+    }
+
+    .paymentlink {
+        margin: 0;
+    }
+
+    .third-block-left-img, .block-right-img, .fourth-block-left-img {
+        max-width: 100%;
+        width: 100%;
+        height: 320px;
+        max-height: 100%;
+        background-size: contain;
+    }
+
+    .block-left-h1, .block-left-h2, .block-left-p {
+        font-size: 22px;
+    }
+
+    .block-left-p:before {
+        content: "";
+        width: 56px;
+        height: 60px;
+        border-radius: 50px;
+        background-image: url('../img/light.jpg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: -14px;
+        margin-right: 7px;
+    }
+
+    .block-left-info-p {
+        font-size: 18px
+    }
+
+    .button-first-screen {
+        margin-top: 20px;
+        padding: 20px 60px;
+        font-size: 18px;
+    }
+
+    .screen-title-block {
+        margin: 30px auto;
+    }
+
+    .screen-title {
+        font-size: 24px;
+    }
+
+    .screen-under-title {
+        margin: 15px;
+    }
+
+    .second-screen {
+        margin: 30px 0;
+    }
+
+    .second-screen-link {
+        font-size: 18px;
+        width: 80%;
+    }
+
+    .second-screen-desc {
+        padding: 20px;
+    }
+
+    .second-screen-img {
+        max-width: 96px;
+        max-height: 96px;
+    }
+
+    .second-screen-img img {
+        max-width: 96px;
+        max-height: 96px;
+    }
+
+    .payment-left h3 {
+        font-size: 18px
+    }
+
+    .paymentimg {
+        width: 96px;
+        height: 96px;
+        max-width: 96px;
+        margin-left: 20px;
+    }
+
+    .paymentlink {
+        padding: 10px 15px;
+        font-size: 18px;
+        width: 200px;
+    }
+
+    .paymentground {
+        padding: 20px 20px;
+    }
+
+    .payment-left, .payment-right {
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 100%;
+        flex: 1 1 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+        flex-flow: row wrap;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+    }
+
+    .textcolor {
+        font-size: 24px;
+    }
+
+    .accept-payments {
+        font-size: 18px;
+    }
+
+    .background-third-screen:after {
+        margin: 0;
+    }
+
+    .fourth-block-left h2 {
+        font-size: 24px;
+    }
+
+    .fifth-screen-block {
+        width: 29.3333%;
+        padding: 80px 0;
+        margin-bottom: 20px;
+    }
+
+    .fifth-screen-block:nth-child(3n+1) {
+        clear: both;
+    }
+
+    .fifth-screen-desc {
+        padding: 0 20px;
+    }
+
+    .background-fourth-screen:after {
+        margin: 0;
+    }
+
+    .fifth-screen-blocks {
+        overflow: hidden;
+    }
+
+    .contacts-left, .contacts-right {
+        width: 43.33333333%;
+        display: block;
+        margin: 20px;
+    }
+
+    .form {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        max-width: unset;
+        width: auto;
+    }
+
+    .for_who {
+        width: auto;
+    }
+
+    footer {
+        margin: 0;
+        margin-bottom: 100px;
+    }
+
+    .footer-menu {
+        margin-right: 9.33333%;
+        margin-left: 3.33333%;
+    }
+
+    .footer {
+        width: 69.33333%;
+    }
+
+    .social-icons {
+        width: 29.333333%
+    }
+
+    .footer-menu ul li {
+        padding-bottom: 10px;
+    }
+
+    .footer-menu h4 {
+        padding-bottom: 10px;
+    }
+
+    .fourth-block-left, .fourth-block-right {
+        padding: 100px 0;
+        padding-bottom: 0;
+    }
+
+    .background-seventh-screen {
+        height: 738px;
+    }
+
+    .input_form {
+        margin-bottom: 20px;
+    }
+
+    .submit_form {
+        margin: 30px 0;
+    }
+
+    .form h3 {
+        padding: 0;
+    }
+}
+
+@media screen and (min-width: 420px) and (max-width: 768px) {
+    .fifth-screen-block {
+        width: 45.333333%;
+        margin-bottom: 20px;
+        min-height: 280px;
+        max-height: 280px;
+    }
+
+    .second-screen-block {
+        width: 31%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-right: 2.3333333333%;
+    }
+
+    .fifth-screen-desc {
+        padding: 10px;
+    }
+
+    .fifth-screen-block:nth-child(3n) {
+        margin-right: 1.333333%;
+    }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1800px) {
+    .third-block-left-img, .block-right-img, .fourth-block-left-img {
+        max-width: 100%;
+        width: 100%;
+        height: 320px;
+        max-height: 100%;
+        background-size: contain;
+        background-position: top center;
+    }
+}
+
+@media screen and (max-width: 1800px) and (min-width: 1300px) {
+    .background-third-screen {
+        padding-bottom: 0;
+    }
+}
+
+@media screen and (max-width: 1139px) and (min-width: 768px) {
+    .second-screen-block {
+        width: 32.77777777%;
+        margin: 0;
+    }
+
+    .seperator {
+        display: none;
+    }
+
+    .payment-img {
+        border: 1px solid #ececec;
+    }
+
+    .payment-icon-block {
+        border: 0;
+    }
+}
+
+@media screen and (max-width: 680px) and (min-width: 420px) {
+    .second-screen-block {
+        width: 46.8888888%;
+        margin: 0;
+        margin-bottom: 5px;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+}
+
+@media screen and (max-width: 920px) and (min-width: 768px) {
+    .second-screen-block {
+        width: 49%;
+        margin: 0;
+        margin-bottom: 5px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .bg_main {
+        display: none;
+    }
+}

@@ -1,0 +1,108 @@
+services:
+    App\PaymentSystemManager\WebmoneyManager:
+        arguments: ['@logger', '@router', '@GuzzleHttp\Client']
+        tags: [{ name: monolog.logger, channel: webmoney }, 'payment_system_manager']
+
+    App\PaymentSystemManager\InterkassaManager:
+        arguments: ['@logger', '@router']
+        tags: [{ name: monolog.logger, channel: interkassa }, 'payment_system_manager']
+
+    App\PaymentSystemManager\PayeerManager:
+        arguments: ['@logger', '@router',  '@ewll.db.repository-provider']
+        tags: [{ name: monolog.logger, channel: payeer }, 'payment_system_manager']
+
+    App\PaymentSystemManager\FreekassaManager:
+        arguments: ['@logger', '@router']
+        tags: [{ name: monolog.logger, channel: freekassa }, 'payment_system_manager']
+
+    App\PaymentSystemManager\AdvcashManager:
+        arguments: ['@logger', '@router']
+        tags: [{ name: monolog.logger, channel: advcash }, 'payment_system_manager']
+
+    App\PaymentSystemManager\UnitpayManager:
+        arguments: ['@logger', '@router']
+        tags: [{ name: monolog.logger, channel: unitpay }, 'payment_system_manager']
+
+    App\PaymentSystemManager\EnfinsManager:
+        arguments: ['@logger', '@router', '@GuzzleHttp\Client']
+        tags: [{ name: monolog.logger, channel: enfins }, 'payment_system_manager']
+
+    App\PaymentSystemManager\ExchangerManager:
+        arguments:
+            - '@logger'
+            - '@router'
+            - '@App\PaymentSystemManager\YandexManager'
+            - '@ewll.db.repository-provider'
+            - '@App\PaymentAccountFetcher'
+        tags: [{ name: monolog.logger, channel: exchanger }, 'payment_system_manager']
+
+    App\PaymentSystemManager\BitcoinManager:
+        arguments:
+            - '@App\MessageBroker'
+            - '@ewll.db.repository-provider'
+            - '@logger'
+            - '@router'
+            - '@GuzzleHttp\Client'
+            - '@skies_barcode.generator'
+        tags: [{ name: monolog.logger, channel: bitcoin }, 'payment_system_manager']
+
+    App\PaymentSystemManager\TestManager:
+        arguments: ['@logger', '@router', '@App\MessageBroker']
+        tags: ['payment_system_manager']
+
+    App\PaymentSystemManager\QiwiManager:
+        arguments: ['@logger', '@router', '@GuzzleHttp\Client', '@App\PaymentAccountant']
+        tags: [{ name: monolog.logger, channel: qiwi }, 'payment_system_manager']
+
+    App\PaymentSystemManager\SelfManager:
+        arguments: ['@logger', '@router', '@ewll.db.repository-provider', '@App\Authenticator', '@App\MessageBroker']
+        tags: [{ name: monolog.logger, channel: self }, 'payment_system_manager']
+
+    App\PaymentSystemManager\YandexManager:
+        arguments:
+            - '@logger'
+            - '@router'
+            - '@GuzzleHttp\Client'
+            - '@App\MessageBroker'
+            - '@App\PaymentAccountant'
+            - '@old_sound_rabbit_mq.yandex_transactions_producer'
+            - '@App\FastDbLogger'
+            - '@ewll.db.repository-provider'
+        tags: [{ name: monolog.logger, channel: yandex }, 'payment_system_manager']
+
+    App\PaymentSystemManager\GamemoneyManager:
+        arguments:
+            - '@logger'
+            - '@router'
+            - '@GuzzleHttp\Client'
+        tags: [{ name: monolog.logger, channel: gamemoney }, 'payment_system_manager']
+
+    App\PaymentSystemManager\MpayManager:
+        arguments:
+            - '@ewll.db.repository-provider'
+            - '@logger'
+            - '@router'
+            - '@translator'
+            - '@GuzzleHttp\Client'
+            - '@validator'
+            - '@App\PaymentAccountant'
+        tags: [{ name: monolog.logger, channel: mpay }, 'payment_system_manager']
+
+    App\PaymentSystemManager\MpayCardManager:
+        arguments:
+            - '@ewll.db.repository-provider'
+            - '@logger'
+            - '@router'
+            - '@translator'
+            - '@GuzzleHttp\Client'
+            - '@validator'
+            - '@App\PaymentAccountant'
+        tags: [{ name: monolog.logger, channel: mpay_card }, 'payment_system_manager']
+
+    App\PaymentSystemManager\PayopManager:
+        arguments:
+            - '@logger'
+            - '@router'
+            - '@GuzzleHttp\Client'
+            - '@ewll.db.repository-provider'
+        tags: [{ name: monolog.logger, channel: payop }, 'payment_system_manager']

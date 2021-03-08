@@ -1,0 +1,31 @@
+{% extends "/landing/payepe/base.html.twig" %}
+
+{% block content %}
+{{ form_start(form) }}
+{{ form_row(form.email, {'attr': {'class': 'input_form', 'placeholder': 'Email: *', 'size': '40'}}) }}
+{{ form_row(form.pass, {'attr': {'class': 'input_form', 'placeholder': 'Пароль: *', 'size': '40'}}) }}
+{% if form.captcha is defined %}
+    <div>
+        <div style="display: flex; align-items: center;">
+            <div><img src="{{ captchaUrl }}" id='captchaImage'></div>
+            <div style="padding-left: 5px;">
+                <a href="#" id="refreshCaptcha" onclick="refreshCaptcha()">
+                    {% trans %}refresh-image{% endtrans %}
+                </a>
+            </div>
+        </div>
+
+        {{ form_row(form.captcha, {'attr': {'class': 'input_form', 'placeholder': 'Символы с картинки', 'size': '40'}}) }}
+    </div>
+{% endif %}
+{% if form.vars.errors|length > 0 %}
+    <ul>
+        {% for error in form.vars.errors %}
+            <li>{{ error.message | trans(domain='validators') }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{{ form_row(form.signIn, {'attr': {'class': 'submit_form'}}) }}
+<!--{{ form_row(form.signUp) }}-->
+{{ form_end(form) }}
+{% endblock %}

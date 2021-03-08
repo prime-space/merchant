@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <noscript>
+        <strong>We're sorry but application doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app">
+        <div v-cloak>
+            <div class="content">
+                <div class="desktop">
+                    <app-header></app-header>
+                </div>
+                <div class="mobile">
+                  <app-header-mobile></app-header-mobile>
+                </div>
+                <div class="mobile">
+                    <user-card></user-card>
+                </div>
+                <div class="main">
+                    <div class="wrapper">
+                        <div class="side-panel desktop">
+                            <user-card></user-card>
+                            <left-menu></left-menu>
+                        </div>
+                        <app-main-container>
+                            <router-view></router-view>
+                        </app-main-container>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <app-footer></app-footer>
+            </div>
+        </div>
+        <div class="background" v-if="!$data">
+            <div class="sk-folding-cube">
+                <div class="sk-cube1 sk-cube"></div>
+                <div class="sk-cube2 sk-cube"></div>
+                <div class="sk-cube4 sk-cube"></div>
+                <div class="sk-cube3 sk-cube"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block title %}Кошелек{% endblock %}
+
+{% block stylesheets %}
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&amp;subset=cyrillic" rel="stylesheet">
+    <link rel="stylesheet" href="/inc/wallet.css?{{ version }}">
+{% endblock %}
+
+{% block javascripts %}
+    <script>var config = JSON.parse('{{ jsConfig|raw }}');</script>
+    <script src="/inc/vue-2.6.10.min.js"></script>
+    <script src="/inc/wallet.js?{{ version }}"></script>
+{% endblock %}

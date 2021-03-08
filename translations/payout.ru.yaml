@@ -1,0 +1,19 @@
+status:
+    0: Не определен
+    1: На очереди
+    2: На очереди
+    3: Исполнен
+    4: Ошибка
+    5: На очереди
+method.name:
+     yandex: Yandex
+     qiwi: Qiwi
+     webmoney-r: Webmoney R
+     transfer: Primepayer
+     card: Карты
+     card_: Карты_
+set.status:
+    1: Выполняется
+    2: Выполнено
+    3: Выполнено частично
+    4: Ошибка

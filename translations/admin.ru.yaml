@@ -1,0 +1,9 @@
+shop.status.1: Не проверен
+shop.status.2: В работе
+shop.status.3: На проверке
+shop.status.4: Отклонен
+ticket.message.author-client-name: Вы
+shop.admin.api.status.1: New
+shop.admin.api.status.2: Working
+shop.admin.api.status.3: On verification
+shop.admin.api.status.4: Declined

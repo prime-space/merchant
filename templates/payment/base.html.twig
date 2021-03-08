@@ -1,0 +1,302 @@
+{% trans_default_domain 'payment' %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <title>{% trans %}title{% endtrans %}</title>
+    <link rel="stylesheet" href="/inc/payment.css?{{ version }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+</head>
+<body>
+<header>
+    <div class="wrapper">
+        <div class="row">
+            <div class="header-desktop bg padding margin">
+                <div class="logo">
+                    <a href="/" target="_blank"><img src="/inc/img/paymentLogo.png" alt="logo" /></a>
+                </div>
+                {% block headerDesctopPaymentData %}{% endblock %}
+            </div>
+            <div class="bg margin hide-large">
+                <div class="left padding-mobile-header">
+                    <div class="logo">
+                        <a href="#"><img src="/inc/img/paymentLogo.png" alt="logo" /></a>
+                    </div>
+                </div>
+                {% block headerMobilePaymentData %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</header>
+
+<section>
+    <article>
+        <div class="wrapper">
+            <div class="row">
+                <div class="payment bg margin">
+                    <div class="page">
+                        <div class="pageLoader">
+                            <a class="back_payment padding"><i class="fas fa-arrow-left"></i>Вернуться к выбору оплаты</a>
+                            <div class="pageLoaderIndent"></div>
+                            <div class="pageLoaderTopBox"></div>
+                            <div class="loader"></div>
+                            <div class="pageLoaderText"></div>
+                            <div class="actionFormBox"></div>
+                        </div>
+                    </div>
+                    {% block shopPrivacy %}{% endblock %}
+                    <hr class="hr">
+                    <div class="footer padding">
+                        <div class="copyright">
+                            <p>2018 Онлайн прием платежей PRIMEPAYER <a href="/registration" class="connect" target="_blank">Подключиться!</a></p>
+                        </div>
+                        <div class="footer_right">
+                            <button class="help help_popup_open">Помощь</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
+
+<div class="pages">
+    <div class="page-loader">
+        <div class="pageLoader">
+            <a class="back_payment padding"><i class="fas fa-arrow-left"></i>Вернуться к выбору оплаты</a>
+            <div class="pageLoaderIndent"></div>
+            <div class="pageLoaderTopBox"></div>
+            <div class="loader"></div>
+            <div class="pageLoaderText"></div>
+            <div class="actionFormBox"></div>
+        </div>
+    </div>
+    <div class="page-currency">
+        <a class="back_payment padding"><i class="fas fa-arrow-left"></i>Вернуться к выбору оплаты</a>
+        <div class="payment_process">
+            <div class="payment_process_left">
+                <div class="payment_process_left_img"><img class="pageCurrencyImg" src="" /></div>
+                <div class="payment_process_left_pay_block">
+                    <p class="payment_process_left_pay">Вы платите с <span class="bold pageCurrencyMethodName"></span></p>
+                </div>
+            </div>
+            <div class="payment_process_right">
+                <div class="payment_process_right_choose pageCurrencyMethods"></div>
+            </div>
+        </div>
+    </div>
+    <div class="page-action">
+        <a class="back_payment padding"><i class="fas fa-arrow-left"></i>Вернуться к выбору оплаты</a>
+        <div class="payment_process">
+            <div class="payment_process_left">
+                <div class="payment_process_left_img"><img class="pageActionImg" src="" /></div>
+                <div class="payment_process_left_pay_block">
+                    <p class="payment_process_left_pay">Вы платите с <span class="bold pageActionMethodName"></span></p>
+                </div>
+            </div>
+            <div class="payment_process_right pageActionProcessRight"></div>
+        </div>
+    </div>
+    <div class="page-mobile">
+        <a class="back_payment padding"><i class="fas fa-arrow-left"></i>Вернуться к выбору оплаты</a>
+        <div class="payment_process mobile">
+            <div class="payment_process_left">
+                <div class="payment_process_left_img"><img class="pageActionImg" src="" /></div>
+                <div class="payment_process_left_pay_block">
+                    <p class="payment_process_left_pay">Вы платите с <span class="bold pageActionMethodName"></span></p>
+                </div>
+            </div>
+            <div class="payment_process_right">
+                <form class="mobile__form">
+                    <div class="payment_process_right_purse">
+                        <i class="fas fa-phone"></i>
+                        <input type="text" name="number" size="25" placeholder="Введите номер телефона">
+                    </div>
+                    <div class="small"><small>Формат: 79123456789</small></div>
+                    <button class="payment_process_right_pay_button"><i class="fas fa-share-square"></i>Оплатить</button>
+                    <input type="hidden" name="methodId">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="page-error">
+        <div class="pageError">
+            <a class="back_payment padding"><i class="fas fa-arrow-left"></i>Вернуться к выбору оплаты</a>
+            <div class="session_has_expired padding">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h2 class="errorHeader"></h2>
+                <p class="errorText"></p>
+                <button style="display:none;" class="continueButton paymentMethod" data-is-group="0">
+                    Попробовать другой шлюз
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="page-yandexCard">
+        <a class="back_payment padding"><i class="fas fa-arrow-left"></i>Вернуться к выбору оплаты</a>
+        <div class="yandexCard">
+            <form class="yandexCard__form">
+                <div class="yandexCard__cards">
+                    <div class="yandexCard__front">
+                        <div class="yandexCard__bankLogoContainer"><a target="_blank" href="#" class="yandexCard__bankLink"></a></div>
+                        <img src="" alt="" class="yandexCard__brandLogo">
+                        <div class="yandexCard__frontFields">
+                            <div>
+                                <input name="cardNumber" class="yandexCard__input__number" type="text" placeholder="0000 0000 0000 0000" autocomplete="off" x-inputmode="numeric" inputmode="numeric" pattern="[0-9 ]*">
+                            </div>
+                            <div class="yandexCard_dateContainer">
+                                <select name="ccmonth" class="yandexCard__input__month">
+                                    <option value="0">ММ</option>
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                <select name="ccyear" class="yandexCard__input__year">
+                                    <option value="0">ГГГГ</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2025">2025</option>
+                                    <option value="2026">2026</option>
+                                    <option value="2027">2027</option>
+                                    <option value="2028">2028</option>
+                                    <option value="2029">2029</option>
+                                </select>
+                            </div>
+                            <div>
+                                <input name="cardHolder" class="yandexCard__input__cardHolder" type="text" placeholder="Ivan Ivanov" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="yandexCard__back">
+                        <div class="yandexCard__backLine"></div>
+                        <input name="cvc" class="yandexCard__input__code" type="text" placeholder="CVC" autocomplete="off" x-inputmode="numeric" inputmode="numeric" pattern="[0-9]*">
+                        <label class="yandexCard__label">Три цифры на обороте карты</label>
+                    </div>
+                </div>
+                <div class="yandexCard__images">
+                    <img src="/inc/cardForm/visa-mastercard-processing.png" alt="visa mastercard" height="40">
+                    <img src="/inc/cardForm/pci-ssc.png" alt="pci ssc" height="40">
+                </div>
+                <div class="yandexCard__buttonBox">
+                    <button class="yandexCard__button">Оплатить ></button>
+                </div>
+                <input name="methodId" type="hidden" class="yandexCard__methodId">
+            </form>
+        </div>
+    </div>
+    <div class="page-askEmail">
+        <a class="back_payment padding"><i class="fas fa-arrow-left"></i>Вернуться к выбору оплаты</a>
+        <div class="payment_process">
+            <div class="payment_process_left">
+                <div class="payment_process_left_img"><img class="pageActionImg" src="" /></div>
+                <div class="payment_process_left_pay_block">
+                    <p class="payment_process_left_pay">Вы платите с <span class="bold pageActionMethodName"></span></p>
+                </div>
+            </div>
+            <div class="payment_process_right askEmail">
+                <form class="askEmail__form">
+                    <p class="askEmail__info">Введите ваш Email</p>
+                    <div class="askEmail__formElements">
+                        <p class="askEmail__error"></p>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <button class="payment_process_right_pay_button">Продолжить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% block pages %}{% endblock %}
+</div>
+
+<div id="help_popup">
+    <div class="popup__close help_popup_close">X</div>
+    <div class="popup__top"><h5>Помощь</h5></div>
+    <div class="popup__body">
+        <div class="helpForm">
+            <form method="POST" action="/help">
+                <div class="helpForm__item">
+                    <div class="helpForm__fieldName">Email</div>
+                    <div class="helpForm__fieldDesc">Укажите адрес, куда мы сможем отправить ответ. Именно на этот адрес должна быть оформлена покупка</div>
+                    <div class="helpForm__fieldField"><input type="text" name="email"></div>
+                    <div class="helpFormError helpFormError__email"></div>
+                </div>
+                <div class="helpForm__item">
+                    <div class="helpForm__fieldName">Описание проблемы</div>
+                    <div class="helpForm__fieldDesc">
+                        Максимально подробное описание проблемы.
+                        Если ошибка - укажите точную ошибку.
+                        Можно добавить ссылку на скриншот или видео
+                    </div>
+                    <div class="helpForm__fieldField"><textarea name="description"></textarea></div>
+                    <div class="helpFormError helpFormError__description"></div>
+                </div>
+                <div class="helpForm__item">
+                    <div class="helpForm__captcha"></div>
+                    <div class="helpForm__fieldName">Код с картинки</div>
+                    <div class="helpForm__fieldField"><input type="text" name="captcha"></div>
+                    <div class="helpFormError helpFormError__captcha"></div>
+                </div>
+                <div class="helpFormError helpFormError__form"></div>
+                <div class="helpForm__item">
+                    <button>Отправить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>var config = JSON.parse('{{ jsConfig|raw }}');</script>
+<script src="/inc/jquery.min.js" type="text/javascript"></script>
+<script src="/inc/jquery.popupoverlay.min.js" type="text/javascript"></script>
+<script src="/inc/jquery.mask.min.js" type="text/javascript"></script>
+<script src="/inc/payment.js?{{ version }}" type="text/javascript"></script>
+
+{% if env == 'prod' %}
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (d, w, c) {
+            (w[c] = w[c] || []).push(function() {
+                try {
+                    w.yaCounter49523695 = new Ya.Metrika2({
+                        id:49523695,
+                        clickmap:true,
+                        trackLinks:true,
+                        accurateTrackBounce:true,
+                        webvisor:true
+                    });
+                } catch(e) { }
+            });
+
+            var n = d.getElementsByTagName("script")[0],
+                s = d.createElement("script"),
+                f = function () { n.parentNode.insertBefore(s, n); };
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = "https://mc.yandex.ru/metrika/tag.js";
+
+            if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else { f(); }
+        })(document, window, "yandex_metrika_callbacks2");
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/49523695" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+{% endif %}
+</body>
+</html>

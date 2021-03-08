@@ -1,0 +1,26 @@
+services:
+    App\Transaction\Method\AbstractTransactionMethod:
+        abstract: true
+        calls:
+            - [setTranslator, ['@translator']]
+            - [setRepositoryProvider, ['@ewll.db.repository-provider']]
+
+    App\Transaction\Method\PayoutTransactionMethod:
+        tags: ['transaction_method']
+        parent: App\Transaction\Method\AbstractTransactionMethod
+
+    App\Transaction\Method\PayoutSetTransactionMethod:
+        tags: ['transaction_method']
+        parent: App\Transaction\Method\AbstractTransactionMethod
+
+    App\Transaction\Method\VoucherTransactionMethod:
+        tags: ['transaction_method']
+        parent: App\Transaction\Method\AbstractTransactionMethod
+
+    App\Transaction\Method\PaymentTransactionMethod:
+        tags: ['transaction_method']
+        parent: App\Transaction\Method\AbstractTransactionMethod
+
+    App\Transaction\Method\PayoutReturnTransactionMethod:
+        tags: ['transaction_method']
+        parent: App\Transaction\Method\AbstractTransactionMethod

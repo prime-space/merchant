@@ -1,0 +1,178 @@
+.yandexCard * {
+  font-family: "Open Sans", sans-serif;
+  box-sizing: border-box;
+  outline: none !important;
+}
+.yandexCard__cards {
+  width: 100%;
+  height: 20em;
+  position: relative;
+  margin: 0;
+}
+.yandexCard__front, .yandexCard__back {
+  position: absolute;
+  width: 76%;
+  height: 16em;
+  border-radius: 0.5em;
+}
+.yandexCard__front {
+  top: 0;
+  left: 0;
+  background: #ddd;
+  z-index: 100;
+}
+.yandexCard__input__number, .yandexCard__input__cardHolder {
+  width: 100%;
+  margin-bottom: 0.3em;
+  margin-top: 0.3em;
+}
+.yandexCard__frontFields {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1em;
+}
+.yandexCard__bankLink {
+  top: 1em;
+  right: 1em;
+  width: 320px;
+  height: 60px;
+  max-width: 60%;
+  display: block;
+  position: relative;
+  left: 1em;
+  background-size: contain;
+  background-position: top left;
+  background-repeat: no-repeat;
+}
+.yandexCard__brandLogo {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+  text-align: right;
+  height: 2.5em;
+}
+.yandexCard__back {
+  bottom: 0;
+  right: 0;
+  background: #bbb;
+  padding-top: 1em;
+  padding-right: 1em;
+  padding-left: 55%;
+}
+.yandexCard__input__code {
+  width: 100%;
+}
+.yandexCard input,  .yandexCard select{
+  border: none !important;
+  font-size: 1.4em;
+  text-indent: 0.1em;
+  color: #333;
+  border-radius: 5px;
+}
+.yandexCard input {
+  padding: 0.3em 0.5em;
+}
+.yandexCard__input__error, .mobile__input__error {
+  background-color: #ffbdbd!important;
+}
+.yandexCard__input__month, .yandexCard__input__year {
+  float: left;
+  width: 3em;
+  margin-right: 0.5em;
+  margin-top: 0.3em;
+}
+.yandexCard__input__year {
+  width: 80px;
+}
+.yandexCard_dateContainer {
+  height: 40px;
+}
+.yandexCard__label {
+  font-size: 1em;
+  display: block;
+  margin-top: 0.6em;
+  padding: 0;
+  text-align: left;
+  color: inherit;
+  font-weight: normal;
+}
+.yandexCard__button {
+  transition: all 0.3s ease;
+  display: inline-block;
+  height: 56px;
+  line-height: 56px;
+  font-size: 1.2em;
+  padding: 0;
+  margin-top: 20px;
+  min-width: 280px;
+  text-align: center;
+  cursor: pointer;
+  background: #1a9d29;
+  color: #fff;
+  text-transform: uppercase;
+  border-radius: 5px;
+  letter-spacing: 0.07em;
+  border: none !important;
+}
+
+.yandexCard__button:hover,
+.yandexCard__button:focus,
+.yandexCard__button:active {
+  background: #4fbc39;
+  color: #fff;
+}
+
+.yandexCard {
+  max-width: 550px;
+  margin: 20px auto;
+}
+
+.yandexCard__front, .yandexCard__back {
+  height: 276px;
+}
+
+.yandexCard__label {
+  margin-top: 0.4em;
+}
+.yandexCard__bankLogoContainer {
+  height: 60px;
+}
+.yandexCard__images {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.yandexCard__buttonBox {
+  text-align: center;
+}
+
+.yandexCard__back {
+  background: #c8c8c8;
+  padding-top: 5em;
+}
+
+.yandexCard__backLine {
+  position: absolute;
+  right: 0;
+  height: 2.5em;
+  top: 1.5em;
+  width: 100%;
+  background: #aaa;
+}
+
+@media (max-width: 640px) {
+  .yandexCard__cards {
+    height: 28em;
+  }
+  .yandexCard__front, .yandexCard__back {
+    height: 18em;
+    width: 100%;
+    font-size: 15px;
+  }
+  .yandexCard__back {
+    top: 19em;
+    height: 11em;
+    padding-left: 1em;
+  } 
+}

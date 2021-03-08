@@ -1,0 +1,187 @@
+monolog:
+    handlers:
+        webmoney:
+            type: rotating_file
+            path: "%kernel.logs_dir%/webmoney.%kernel.environment%.log"
+            level: info
+            channels: [webmoney]
+            max_files: 10
+        interkassa:
+            type: rotating_file
+            path: "%kernel.logs_dir%/interkassa.%kernel.environment%.log"
+            level: info
+            channels: [interkassa]
+            max_files: 10
+        yandex:
+            type: rotating_file
+            path: "%kernel.logs_dir%/yandex.%kernel.environment%.log"
+            level: info
+            channels: [yandex]
+            max_files: 10
+        qiwi_transactions_fetch:
+            type: rotating_file
+            path: "%kernel.logs_dir%/qiwi_transactions_fetch.%kernel.environment%.log"
+            level: info
+            channels: [qiwi_transactions_fetch]
+            max_files: 10
+        qiwi:
+            type: rotating_file
+            path: "%kernel.logs_dir%/qiwi.%kernel.environment%.log"
+            level: info
+            channels: [qiwi]
+            max_files: 10
+        self:
+            type: rotating_file
+            path: "%kernel.logs_dir%/self.%kernel.environment%.log"
+            level: info
+            channels: [self]
+            max_files: 10
+        payeer:
+            type: rotating_file
+            path: "%kernel.logs_dir%/payeer.%kernel.environment%.log"
+            level: info
+            channels: [payeer]
+            max_files: 10
+        advcash:
+            type: rotating_file
+            path: "%kernel.logs_dir%/advcash.%kernel.environment%.log"
+            level: info
+            channels: [advcash]
+            max_files: 10
+        exec_payment:
+            type: rotating_file
+            path: "%kernel.logs_dir%/exec_payment.%kernel.environment%.log"
+            level: info
+            channels: [exec_payment]
+            max_files: 10
+        notification:
+            type: rotating_file
+            path: "%kernel.logs_dir%/notification.%kernel.environment%.log"
+            level: info
+            channels: [notification]
+            max_files: 10
+        currency_sync:
+            type: stream
+            path: "%kernel.logs_dir%/currency_sync.%kernel.environment%.log"
+            level: info
+            channels: [currency_sync]
+        exec_transaction:
+            type: rotating_file
+            path: "%kernel.logs_dir%/exec_transaction.%kernel.environment%.log"
+            level: info
+            channels: [exec_transaction]
+            max_files: 10
+        telegram_notification:
+            type: rotating_file
+            path: "%kernel.logs_dir%/telegram_notification.%kernel.environment%.log"
+            level: info
+            channels: [telegram_notification]
+            max_files: 10
+        admin_api:
+            type: rotating_file
+            path: "%kernel.logs_dir%/admin_api.%kernel.environment%.log"
+            level: info
+            channels: [admin_api]
+            max_files: 10
+        payout:
+            type: rotating_file
+            path: "%kernel.logs_dir%/payout.%kernel.environment%.log"
+            level: info
+            channels: [payout]
+            max_files: 10
+        white_balancing:
+            type: rotating_file
+            path: "%kernel.logs_dir%/white_balancing.%kernel.environment%.log"
+            level: info
+            channels: [white_balancing]
+            max_files: 10
+        mailer:
+            type: rotating_file
+            path: "%kernel.logs_dir%/mailer.%kernel.environment%.log"
+            level: info
+            channels: [mailer]
+            max_files: 10
+        bitcoin:
+            type: rotating_file
+            path: "%kernel.logs_dir%/bitcoin.%kernel.environment%.log"
+            level: info
+            channels: [bitcoin]
+            max_files: 10
+        postback:
+            type: rotating_file
+            path: "%kernel.logs_dir%/postback.%kernel.environment%.log"
+            level: info
+            channels: [postback]
+            max_files: 10
+        mpay:
+            type: rotating_file
+            path: "%kernel.logs_dir%/mpay.%kernel.environment%.log"
+            level: info
+            channels: [mpay]
+            max_files: 10
+        mpay_card:
+            type: rotating_file
+            path: "%kernel.logs_dir%/mpay_card.%kernel.environment%.log"
+            level: info
+            channels: [mpay_card]
+            max_files: 10
+        freekassa:
+            type: rotating_file
+            path: "%kernel.logs_dir%/freekassa.%kernel.environment%.log"
+            level: info
+            channels: [freekassa]
+            max_files: 10
+        exchanger:
+            type: rotating_file
+            path: "%kernel.logs_dir%/exchanger.%kernel.environment%.log"
+            level: info
+            channels: [exchanger]
+            max_files: 10
+        auth:
+            type: rotating_file
+            path: "%kernel.logs_dir%/auth.%kernel.environment%.log"
+            level: info
+            channels: [auth]
+            max_files: 10
+        gamemoney:
+            type: rotating_file
+            path: "%kernel.logs_dir%/gamemoney.%kernel.environment%.log"
+            level: info
+            channels: [gamemoney]
+            max_files: 10
+        payop:
+            type: rotating_file
+            path: "%kernel.logs_dir%/payop.%kernel.environment%.log"
+            level: info
+            channels: [payop]
+            max_files: 10
+        test:
+            type: rotating_file
+            path: "%kernel.logs_dir%/test.%kernel.environment%.log"
+            level: info
+            channels: [test]
+            max_files: 3
+        refund_payment:
+            type: rotating_file
+            path: "%kernel.logs_dir%/refund_payment.%kernel.environment%.log"
+            level: info
+            channels: [refund_payment]
+            max_files: 10
+        voucher:
+            type: rotating_file
+            path: "%kernel.logs_dir%/voucher.%kernel.environment%.log"
+            level: info
+            channels: [voucher]
+            max_files: 10
+        unitpay:
+            type: rotating_file
+            path: "%kernel.logs_dir%/unitpay.%kernel.environment%.log"
+            level: info
+            channels: [unitpay]
+            max_files: 10
+        enfins:
+            type: rotating_file
+            path: "%kernel.logs_dir%/enfins.%kernel.environment%.log"
+            level: info
+            channels: [enfins]
+            max_files: 10

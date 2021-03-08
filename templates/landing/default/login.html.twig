@@ -1,0 +1,14 @@
+{% extends "/landing/default/auth.html.twig" %}
+
+{% block auth_link %}
+    <a href="{{ path('registration') }}" class="auth_link">Регистрация</a>
+{% endblock %}
+
+{% block form_title %}
+    <h3>Вход в кабинет</h3>
+{% endblock %}
+
+{% block form_submit_button %}
+    {{ form_row(form.signIn, {'attr': {'class': 'submit_form'}}) }}
+    <!--{{ form_row(form.signUp) }}-->
+{% endblock %}

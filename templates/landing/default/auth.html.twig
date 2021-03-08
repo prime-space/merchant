@@ -1,0 +1,68 @@
+{% trans_default_domain 'site' %}
+{% extends "/landing/default/base.html.twig" %}
+{% block head %}
+    <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_key1 }}"></script>
+    <script>
+        var login = function(form) {
+            grecaptcha.ready(function () {
+                grecaptcha.execute('{{ recaptcha_key1 }}', {action: 'login'}).then(function (token) {
+                    document.getElementById('form_recaptcha').value = token;
+                    form.submit();
+                });
+            });
+        };
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="container-full-width login_form">
+        <div class="container">
+            <div class="row">
+                <div class="login_form_block wow fadeIn">
+                    <div class="form_second">
+                        {% block form_title %}
+                        {% endblock %}
+                        {{ form_start(form, {'attr': {'onsubmit':'login(this);return false'}}) }}
+                        {{ form_row(form.email, {'attr': {'class': 'input_form', 'placeholder': 'Email: *', 'size': '40'}}) }}
+                        {{ form_row(form.pass, {'attr': {'class': 'input_form', 'placeholder': 'Пароль: *', 'size': '40'}}) }}
+                        {% if form.captcha is defined %}
+                            <div>
+                                <div style="display: flex; align-items: center;">
+                                    <div><img src="{{ captchaUrl }}" id='captchaImage'></div>
+                                    <div style="padding-left: 5px;">
+                                        <a href="#" id="refreshCaptcha" onclick="refreshCaptcha()">
+                                            {% trans %}refresh-image{% endtrans %}
+                                        </a>
+                                    </div>
+                                </div>
+
+                                {{ form_row(form.captcha, {'attr': {'class': 'input_form', 'placeholder': 'Символы с картинки', 'size': '40'}}) }}
+                            </div>
+                        {% endif %}
+                        {% if form.vars.errors|length > 0 %}
+                            <ul>
+                                {% for error in form.vars.errors %}
+                                    <li>{{ error.message | trans(domain='validators') }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        {% block form_submit_button %}
+                        {% endblock %}
+                        {{ form_end(form) }}
+                        {% block auth_link %}{% endblock %}
+                        <script>
+                            refreshCaptcha = function () {
+                                document.getElementById('captchaImage').src = '/captcha?' + Math.random();
+                            };
+                            let captchaInput = document.getElementById('form_captcha');
+                            if (captchaInput !== null) {
+                                captchaInput.value = '';
+                            }
+                        </script>
+                    </div>
+                    <!--<a href="#" class="forget_pass">Забыли пароль?</a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,87 @@
+services:
+     App\Command\AbstractCommand:
+        abstract: true
+        calls:
+            - [setLogExtraDataKeeper, ['@App\Logger\LogExtraDataKeeper']]
+            - [setRepositoryProvider, ['@ewll.db.repository-provider']]
+
+     App\Command\SyncCurrencyRatesCommand:
+        parent: App\Command\AbstractCommand
+        arguments: ['@monolog.logger.currency_sync', '@GuzzleHttp\Client']
+        tags:
+            - { name: 'console.command', command: 'currency:sync' }
+            - { name: monolog.logger, channel: currency_sync }
+
+     App\Command\TestLockCommand:
+        arguments: ['@ewll.db.client.default', '@App\PaymentAccountFetcher', '@ewll.db.repository-provider', '@App\MessageBroker', '@App\FeeFetcher', '@logger', '@App\PaymentSystemManager\QiwiManager', '@GuzzleHttp\Client']
+        tags:
+            - { name: 'console.command', command: 'test-lock' }
+            - { name: monolog.logger, channel: test }
+
+     App\Command\ClearIpControlCommand:
+        parent: App\Command\AbstractCommand
+        arguments: ['@logger']
+        tags:
+            - { name: 'console.command', command: 'ip-control:clear' }
+
+     App\Command\CheckBitcoinTransactionsCommand:
+        parent: App\Command\AbstractCommand
+        arguments: ['@App\PaymentSystemManager\BitcoinManager', '@logger']
+        tags:
+            - { name: 'console.command', command: 'bitcoin:check-transactions' }
+            - { name: monolog.logger, channel: bitcoin }
+
+     App\Command\ClearUserSessionsCommand:
+        parent: App\Command\AbstractCommand
+        arguments: ['@logger']
+        tags:
+            - { name: 'console.command', command: 'user:clear-sessions' }
+
+     App\Command\ClearSessionsCommand:
+        parent: App\Command\AbstractCommand
+        arguments: ['@logger']
+        tags:
+            - { name: 'console.command', command: 'sessions:clear' }
+
+     App\Command\GamemoneyRawPayoutCommand:
+        parent: App\Command\AbstractCommand
+        arguments: ['@logger', '@App\PaymentSystemManager\GamemoneyManager']
+        tags:
+            - { name: 'console.command', command: 'gamemoney:raw-payout' }
+            - { name: monolog.logger, channel: gamemoney }
+
+     App\Command\QiwiReexec:
+        parent: App\Command\AbstractCommand
+        arguments: ['@logger', '@GuzzleHttp\Client', '@App\PaymentSystemManager\QiwiManager', '@App\MessageBroker']
+        tags:
+            - { name: 'console.command', command: 'qiwi:reexec' }
+
+     App\Command\YandexReexec:
+        parent: App\Command\AbstractCommand
+        arguments: ['@logger', '@App\PaymentSystemManager\YandexManager', '@App\MessageBroker']
+        tags:
+            - { name: 'console.command', command: 'yandex:reexec' }
+
+     App\Command\OptimizeQueueTablesCommand:
+        parent: App\Command\AbstractCommand
+        arguments: ['@logger', '@App\MessageBroker']
+        tags:
+            - { name: 'console.command', command: 'message-broker:optimize-queue-tables' }
+
+     App\Command\ExcludePayoutMethodByIdCommand:
+       parent: App\Command\AbstractCommand
+       arguments: ['@logger', '@ewll.db.client.default']
+       tags:
+         - { name: 'console.command', command: 'payout-method:exclude' }
+
+     App\Command\ExcludePaymentMethodByIdCommand:
+       parent: App\Command\AbstractCommand
+       arguments: ['@logger', '@ewll.db.client.default']
+       tags:
+         - { name: 'console.command', command: 'payment-method:exclude' }
+
+     App\Command\PayoutRecheckCommand:
+       parent: App\Command\AbstractCommand
+       arguments: ['@logger', '@App\Payout\Processor\PayoutProcessor']
+       tags:
+         - { name: 'console.command', command: 'payout:recheck' }

@@ -1,0 +1,19 @@
+{% if step == 'getToken' %}
+    <form action="{{ url }}" method="POST">
+        <input type="submit" value="Получить токен" />
+    </form>
+{% elseif step == 'showForm' %}
+    <form action="{{ url }}" method="POST">
+        Идентификатор приложения<input type="text" name="client_id" />
+        OAuth2 client_secret<input type="text" name="secret" />
+        access token<input type="text" name="at" value="{{ code }}"/>
+        <input type="submit" value="Получить" />
+    </form>
+{% elseif step == 'result' %}
+    instance_id: {{ instance_id }}<br>
+    client_id: {{ client_id }}<br>
+    secret: {{ secret }}<br>
+    token: {{ token }}
+{% else %}
+    Error
+{% endif %}

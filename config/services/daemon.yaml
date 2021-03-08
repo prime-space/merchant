@@ -1,0 +1,92 @@
+services:
+    App\Daemon\Daemon:
+        abstract: true
+        calls:
+            - [setLogExtraDataKeeper, ['@App\Logger\LogExtraDataKeeper']]
+            - [setRepositoryProvider, ['@ewll.db.repository-provider']]
+
+    App\Daemon\ExecPaymentDaemon:
+        parent: App\Daemon\Daemon
+        arguments: ['@logger', '@App\MessageBroker', '@ewll.db.client.default', '@App\Accountant', '@App\PaymentDayStatisticCounter', '@App\PostbackManager']
+        tags:
+            - { name: 'console.command', command: 'daemon:exec-payment' }
+            - { name: monolog.logger, channel: exec_payment }
+
+    App\Daemon\SendNotificationDaemon:
+        parent: App\Daemon\Daemon
+        arguments: ['@logger', '@App\MessageBroker', '@GuzzleHttp\Client', '%proxies%']
+        tags:
+            - { name: 'console.command', command: 'daemon:send-notification' }
+            - { name: monolog.logger, channel: notification }
+
+    App\Daemon\ExecTransactionDaemon:
+        parent: App\Daemon\Daemon
+        arguments: ['@logger', '@App\MessageBroker', '@ewll.db.client.default', '@App\Accountant']
+        tags:
+            - { name: 'console.command', command: 'daemon:exec-transaction' }
+            - { name: monolog.logger, channel: exec_transaction }
+
+    App\Daemon\ExecVoucherDaemon:
+        parent: App\Daemon\Daemon
+        arguments: ['@logger', '@App\MessageBroker', '@App\VoucherManager']
+        tags:
+            - { name: 'console.command', command: 'daemon:exec-voucher' }
+            - { name: monolog.logger, channel: voucher }
+
+    App\Daemon\FetchQiwiTransactionsDaemon:
+        parent: App\Daemon\Daemon
+        arguments: ['@logger', '@GuzzleHttp\Client', '@App\PaymentSystemManager\QiwiManager', '@App\MessageBroker', '@App\PaymentAccountant']
+        tags:
+            - { name: 'console.command', command: 'daemon:qiwi-transactions-fetch' }
+            - { name: monolog.logger, channel: qiwi_transactions_fetch }
+
+    App\Daemon\TelegramNotificationDaemon:
+        parent: App\Daemon\Daemon
+        arguments: ['@logger', '@App\MessageBroker', '%telegram_chat_id%', '%telegram_bot_token%', '@App\TelegramSender']
+        tags:
+            - { name: 'console.command', command: 'daemon:telegram-send-notification' }
+            - { name: monolog.logger, channel: telegram_notification }
+
+    App\Daemon\PayoutDaemon:
+        parent: App\Daemon\Daemon
+        arguments:
+            - '@logger'
+            - '@App\MessageBroker'
+            - '@App\TagServiceProvider\TagServiceProvider'
+            - !tagged payment_system_manager
+            - '@App\PaymentAccountFetcher'
+            - '@ewll.db.client.default'
+            - '@App\TelegramSender'
+            - '@App\Payout\Processor\PayoutProcessor'
+        tags:
+            - { name: 'console.command', command: 'daemon:payout' }
+            - { name: monolog.logger, channel: payout }
+
+    App\Daemon\PayoutCheckDaemon:
+        parent: App\Daemon\Daemon
+        arguments:
+            - '@logger'
+            - '@App\MessageBroker'
+            - '@App\TagServiceProvider\TagServiceProvider'
+            - !tagged payment_system_manager
+            - '@App\PaymentAccountFetcher'
+            - '@ewll.db.client.default'
+            - '@App\TelegramSender'
+            - '@App\Payout\Processor\PayoutProcessor'
+        tags:
+            - { name: 'console.command', command: 'daemon:payout-check' }
+            - { name: monolog.logger, channel: payout }
+
+    App\Daemon\WhiteBalancingDaemon:
+        parent: App\Daemon\Daemon
+        arguments: ['@logger', '@App\MessageBroker', '@App\TagServiceProvider\TagServiceProvider', !tagged payment_system_manager, '@App\PaymentAccountFetcher', '%is_white_balancing_enabled%']
+        tags:
+            - { name: 'console.command', command: 'daemon:white-balancing' }
+            - { name: monolog.logger, channel: white_balancing }
+
+    App\Daemon\SendMailDaemon:
+        parent: App\Daemon\Daemon
+        arguments: ['@logger', '@App\MessageBroker', '@App\Mailer']
+        tags:
+            - { name: 'console.command', command: 'daemon:send-mail' }
+            - { name: monolog.logger, channel: mailer }

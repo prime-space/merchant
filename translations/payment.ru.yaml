@@ -1,0 +1,83 @@
+title: Оплата
+validation:
+  shop:
+    not-found: Магазин не найден
+    not-allowed: Платежи не разрешены
+    no-one-method: Не найдено ни одного доступного метода оплаты
+    not-allowed-redefine-url: Запрещено переопределение url
+    masked-not-match: Не разрешено использовать магазин с этой оберткой
+  payment:
+    forbidden-to-change: 'Запрещено переопределять следующие параметры: %parameterList%'
+  missing-parameters: Отсутствуют параметры платежа
+not-found: Платеж не найден
+something-went-wrong: Что-то пошло не так. Попробуйте еще раз или выберите другой метод оплаты.
+method-not-found: Платежное направление не найдено, выберите другое
+method-not-available: Платежное направление недоступно, попробуйте еще раз или выберите другое
+method-not-selected: Выберите платежное направление
+method-group:
+    1: Webmoney
+    2: Карты
+redirect:
+    to-pay: Через несколько секунд вы будете переадресованы на оплату
+    title: Переадресация на оплату
+    btn: Оплатить
+return:
+    btn: Вернуться в магазин
+    title: Возврат на сайт
+    message:
+      fail: Ошибка платежа. Через несколько секунд вы будете переадресованы в магазин
+      success: Успешно. Через несколько секунд вы будете переадресованы в магазин
+description: 'Оплата заказа №%payment% [#%paymentId%]'
+description-exchanger: 'Обмен средств по заказу №%payment% [#%paymentId%]'
+pay-button: Оплатить
+currency:
+    1:
+        sign: $
+        short: долл.
+        short-latin: usd
+    2:
+        sign: €
+        short: евро
+        short-latin: eur
+    3:
+        sign: ₽
+        short: руб.
+        short-latin: rub
+    4:
+        sign: ₴
+        short: грн.
+        short-latin: uah
+    5:
+        sign: Ƀ
+        short: btc
+        short-latin: btc
+attention: Внимание
+waiting:
+    info: Мы ожидаем оплату счета. Страница перезагрузится автоматически.
+    take-another: Если вы еще не произвели оплату, вы можете выбрать другой метод оплаты.
+    title: Ожидание оплаты
+    btn: Выбрать другой метод
+payment-acceptance: Прием платежей
+payment-order-in-store: Оплата заказа в магазине
+join-now: Подключиться прямо сейчас!
+universal-payment-solution: Универсальное решение по приему Онлайн Платежей для вашего бизнеса.
+error:
+  title: Ошибка платежа
+  daily-limit-exceeded: Операция не может быть создана по причине достижения магазином дневного лимита
+pay-with: Оплатить с помощью
+not-close-page: Не закрывайте эту страницу
+we-wait-while-you-pay: Мы ждем, пока вы выполните платеж через %methodName% в новом окне или вкладке браузера.
+notification-status:
+    0: Неизвестно
+    1: Отправляется
+    2: Отправлено
+    3: Ошибка
+refund-status:
+    1: Не выполнялся
+    2: Ваучер предоставлен, средства с продавца списаны
+    3: Выполнен
+fee-payer-shop: Магазин
+fee-payer-client: Покупатель
+payment-status-executed: Выполнено
+payment-status-not-executed: Ожидание оплаты
+thank-you: Благодарим за оплату

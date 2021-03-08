@@ -1,0 +1,42 @@
+This form should not contain extra fields.: В запросе присутствуют лишние параметры
+constraint:
+    receiver:
+        incorrect: Неверный формат получателя
+        self: Невозможно перечислить на тот же счет
+        currency: Счет имеет другую валюту
+        not-found: Счет не найден
+    accuracy: 'Максимальная точность: %accuracy%'
+    currency: Неизвестная валюта
+    account: Счет не найден
+    via: Неизвестное платежное направление
+    method-disabled: Платежное направление отключено
+    method-not-realised: Платежное направление недоступно
+    method-excluded: Платежное направление недоступно
+    payment-sign: Неверная подпись
+    user-blocked: Вы заблокированы
+    duplicate-id: 'Дубликат id (operationId: #%operationId%)'
+    domains-does-not-match: Домен должен совпадать с указанным в URL
+    shop-url-cannot-change: Изменять url сайта запрещено
+    payment-refund:
+        not-match: Заказ с таким сочетанием номера и кода не найден
+        used: Код уже был использован ранее
+    voucher:
+        not-found: Ваучер не найден
+        used: Ваучер уже использован
+account:
+    insufficient-funds: Недостаточно средств
+    not-found: Аккаунт не найден
+    blocked: Аккаунт заблокирован. Обратитесь в поддержку
+parameter: Параметр
+invalid-captcha: Вы неправильно ввели символы с изображения
+fill-field: Заполните это поле
+not-unique-email: Такой Email уже есть в системе
+invalid-login-or-user-name: Неверный логин или пароль
+invalid-password: Неверный пароль
+empty-password: Пустой пароль
+invalid-ips: Неверные IP-адреса
+invalid-site: Неверный адрес сайта
+try-later: Попробуйте позже
+confirm-email-sent: Вам отправлено письмо для подтверждения Email адреса
+confirm-email: Подтвердите ваш Email адрес
+robot: Нам кажется, что вы робот, обратитесь в поддержку

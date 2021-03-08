@@ -1,0 +1,409 @@
+{% extends "/landing/default/base.html.twig" %}
+
+{% block content %}
+    <div class="bg_main"></div>
+    <div class="wrapper"> <!-- wrapper -->
+            <!-- header -->
+            <header>
+                <div class="container">
+                    <div class="menu">
+                        <div class="container">
+                            <div class="row">
+                                <div class="logo_block">
+                                    <a href="/"><img src="/inc/landing/img/logo.png" alt="logo" class="logo"/></a>
+                                </div>
+                                <div class="menu_block"> <!-- menu_block -->
+                                    <ul>
+                                        <li><a href="#products">Продукты</a></li>
+                                        <li><a href="#tariff">Тарифы</a></li>
+                                        <li><a href="/doc">DOC</a></li>
+                                        <li><a href="#about">Преимущества</a></li>
+                                        <li class="user_profile"><a href="/private"><i class="fas fa-sign-out-alt"></i>Личный
+                                                кабинет</a></li>
+                                        <a href="/registration" class="registration">Регистрация</a>
+                                    </ul>
+                                </div>
+                                <div class="menu_block_mobile"> <!-- menu_block_mobile -->
+                                    <span class="mobile_menu_open">
+                              <span class="mobile_menu_separator"></span>
+                              <span class="mobile_menu_separator"></span>
+                              <span class="mobile_menu_separator"></span>
+                            </span>
+                                    <ul>
+                                        <li><a href="#products">Продукты</a></li>
+                                        <li><a href="#tariff">Тарифы</a></li>
+                                        <li><a href="/doc">DOC</a></li>
+                                        <li><a href="#about">Преимущества</a></li>
+                                        <li class="user_profile"><a href="/private"><i class="fas fa-sign-out-alt"></i>Личный
+                                                кабинет</a></li>
+                                        <a href="/registration" class="registration">Регистрация</a>
+                                    </ul>
+                                </div>  <!-- menu_block_mobile -->
+                            </div>
+                        </div>
+
+                    </div> <!-- menu -->
+                    <div class="first-screen"> <!-- first-screen -->
+                        <div class="row">
+                            <div class="block-left">
+                                <div class="separator">
+                                    <h1 class="block-left-h1">ОНЛАЙН</h1>
+                                    <h2 class="block-left-h2">ПРИЕМ Платежей</h2>
+                                </div>
+                                <p class="block-left-p">Подключим Ваш бизнес</p>
+                                <div class="separator">
+                                    <p class="block-left-info-p">Один API ко всем платежным направлениям.<br><br> Имеет
+                                        простой протокол взаимодействия и <br> легкую интеграцию в новый или уже <br>
+                                        работающий бизнес.</p>
+                                </div>
+                                <form method="get" action="/private">
+                                    <button class="button-first-screen wow fadeInUp">Принимать платежи</button>
+                                </form>
+                            </div>
+                            <div class="block-right">
+                                <div class="block-right-img wow fadeIn"></div>
+                            </div>
+                        </div>
+                    </div> <!-- first-screen -->
+
+                </div>
+            </header>
+            <!-- header -->
+
+    </div> <!-- wrapper -->
+    <!-- section -->
+    <section>
+
+        <article> <!-- article -->
+            <div class="screen-title-block wow fadeInUp" id="products">
+                <div class="row">
+                    <h2 class="screen-title">Универсальное платежное решение</h2>
+                    <p class="screen-under-title">Четыре готовых решений для вашего бизнеса</p>
+                </div>
+            </div>
+        </article> <!-- article -->
+
+        <!-- article second-screen -->
+        <article>
+
+            <div class="container-full-width background-second-screen wow fadeInUp">
+                <div class="wrapper">
+                    <div class="row">
+                        <div class="second-screen">
+                            <!-- second-screen-block -->
+                            <div class="second-screen-block">
+                                <div class="second-screen-img"><i class="fas fa-donate"></i></div>
+                                <p class="second-screen-title">Массовые Выплаты Клиентам</p>
+                                <p class="second-screen-desc">Одна интеграция. Делайте автоматические выплаты своим
+                                    клиентам — на электронные кошельки, телефоны.</p>
+                                <a href="#" class="second-screen-link">Подробнее</a>
+                            </div>
+                            <!-- second-screen-block -->
+
+                            <!-- second-screen-block -->
+                            <div class="second-screen-block">
+                                <div class="second-screen-img"><i class="fas fa-chart-bar"></i></div>
+                                <p class="second-screen-title">Прием Онлайн Платежей</p>
+                                <p class="second-screen-desc">Один API ко всем платежным направлениям. Имеет простой
+                                    протокол взаимодействия и легкую интеграцию в новый или уже работающий бизнес.</p>
+                                <a href="#" class="second-screen-link">Подробнее</a>
+                            </div>
+                            <!-- second-screen-block -->
+
+                            <!-- second-screen-block -->
+                            <div class="second-screen-block">
+                                <div class="second-screen-img"><i class="fas fa-shopping-basket"></i></div>
+                                <p class="second-screen-title">Создание Онлайн Магазина</p>
+                                <p class="second-screen-desc">Удобный инструмент для создания Интернет-Магазина с
+                                    моментальной доставкой оплаченного товара или услуги покупателю.</p>
+                                <a target="_blank" href="https://primearea.biz" class="second-screen-link">Подробнее</a>
+                            </div>
+                            <!-- second-screen-block -->
+                        </div> <!-- second-screen -->
+                        <div class="paymentground">
+                            <div class="payment-left">
+                                <div class="paymetleft-title">ТОРГОВАЯ ПЛОЩАДКА ЦИФРОВЫХ ТОВАРОВ</div>
+                                <div class="paymentimg"><i class="fas fa-globe"></i></div>
+                            </div>
+                            <div class="payment-right">
+                                <a target="_blank" href="https://primearea.biz" class="paymentlink">Подробнее</a>
+                            </div>
+                        </div>
+                    </div> <!-- row -->
+                </div> <!-- wrapper -->
+            </div>  <!-- container-full -->
+        </article>
+        <!-- article second-screen -->
+
+        <!-- article third-screen -->
+        <article>
+
+            <div class="container-full-width background-third-screen" id="tariff">
+                <div class="wrapper">
+                    <div class="row">
+                        <div class="screen-title-block">
+                            <h2 class="screen-title">Облегчаем прием платежей</h2>
+                        </div>
+                        <div class="third-block">
+                            <div class="third-block-left wow fadeInLeft">
+                                <h3>Primepayer</h3>
+                                <p>Универсальное решение по приему платежей для вашего бизнеса. Для работы необходимо
+                                    произвести настройки мерчанта и выполнить интеграцию. После чего сразу можно
+                                    принимать платежи.</p>
+                                <b>Самые низкие тарифы на прием платежей</b>
+                                <p class="textcolor wow fadeInLeft">От 2* %</p>
+                                <small>*Индивидуальные тарифы и условия</small>
+                                <a href="#" class="accept-payments wow fadeInUp">Уточнить тарифы</a>
+                            </div>
+                            <div class="third-block-right">
+                                <div class="third-block-left-img wow fadeInRight"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </article>
+        <!-- article third-screen -->
+
+        <!-- article fourth-screen -->
+        <article>
+            <div class="container-full-width background-fourth-screen wow fadeInLeft">
+                <div class="wrapper">
+                    <div class="row">
+                        <div class="fourth-block-left wow fadeInLeft">
+                            <h2>Подробная аналитика платежей</h2>
+                            <p>Удобный интерфейс для отслеживания всех платежей в одном окне.</p>
+                            <a href="#" class="accept-payments-fourth wow fadeInUp">Принимать платежи</a>
+                        </div>
+                        <div class="fourth-block-right">
+                            <div class="fourth-block-left-img wow fadeInRight"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- article fourth-screen -->
+
+        <!-- article fifth-screen -->
+        <article>
+            <div class="container-full-width background-fifth-screen" id="about">
+                <div class="wrapper">
+                    <div class="row">
+                        <div class="screen-title-block wow fadeInUp">
+                            <h2 class="screen-title">Наши преимущества</h2>
+                            <p class="screen-under-title">Мы делаем все, чтобы вы чувствовали себя комфортно и
+                                безопасно. Просто доверьтесь нам!</p>
+                        </div>
+                        <div class="fifth-screen-blocks">
+                            <div class="fifth-screen-block wow fadeInLeft">
+                                <div class="fifth-screen-img"><i class="fas fa-rocket"></i></div>
+                                <p class="fifth-screen-title">Быстрое подключение</p>
+                                <p class="fifth-screen-desc">Процедура подключения проходит в минимальные сроки, без
+                                    подписи договора.</p>
+                            </div>
+                            <div class="fifth-screen-block wow fadeInUp">
+                                <div class="fifth-screen-img"><i class="fas fa-cogs"></i></div>
+                                <p class="fifth-screen-title">Простая и быстрая интеграция</p>
+                                <p class="fifth-screen-desc">Максимально понятная и полезная документация расскажет все
+                                    о нашем API.</p>
+                            </div>
+                            <div class="fifth-screen-block wow fadeInRight">
+                                <div class="fifth-screen-img"><i class="far fa-credit-card"></i></div>
+                                <p class="fifth-screen-title">Универсальная форма оплаты</p>
+                                <p class="fifth-screen-desc">Вы получаете все доступные методы оплаты в нашей единой
+                                    платежной форме.</p>
+                            </div>
+                            <div class="fifth-screen-block wow fadeInLeft">
+                                <div class="fifth-screen-img"><i class="fas fa-thumbs-up"></i></div>
+                                <p class="fifth-screen-title">Выгодные тарифы</p>
+                                <p class="fifth-screen-desc">Мы постоянно стремимся снизить комиссию в пользу наших
+                                    клиентов.</p>
+                            </div>
+                            <div class="fifth-screen-block wow fadeInUp">
+                                <div class="fifth-screen-img"><i class="fas fa-chart-pie"></i></div>
+                                <p class="fifth-screen-title">Подробная аналитика платежей</p>
+                                <p class="fifth-screen-desc">Удобный интерфейс для отслеживания всех платежей в одном
+                                    окне.</p>
+                            </div>
+                            <div class="fifth-screen-block wow fadeInRight">
+                                <div class="fifth-screen-img"><i class="far fa-money-bill-alt"></i></div>
+                                <p class="fifth-screen-title">Моментальные выплаты</p>
+                                <p class="fifth-screen-desc">Автоматические выплаты на кошельки по Вашему запросу без
+                                    задержек и оправданий.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- article fifth-screen -->
+
+
+        <!-- article sixth-screen -->
+        <article>
+            <div class="container-full-width background-sixth-screen">
+                <div class="wrapper">
+                    <div class="row">
+                        <div class="screen-title-block wow fadeInUp">
+                            <h2 class="screen-title">Клиент сам выбирает способ оплаты</h2>
+                            <p class="screen-under-title">Принимаем более 30 способов оплаты</p>
+                        </div>
+                        <div class="payment-icons wow fadeInLeft">
+                            <div class="payment-icon-block">
+                                <div class="payment-img">
+                                    <img src="/inc/landing/img/payment/webmoney.png" alt="icon"/>
+                                </div>
+                            </div>
+                            <div class="payment-icon-block">
+                                <div class="payment-img">
+                                    <img src="/inc/landing/img/payment/yamoney.png" alt="icon"/>
+                                </div>
+                            </div>
+                            <div class="payment-icon-block">
+                                <div class="payment-img">
+                                    <img src="/inc/landing/img/payment/qiwi.png" alt="icon"/>
+                                </div>
+                            </div>
+                            <div class="payment-icon-block">
+                                <div class="payment-img">
+                                    <img src="/inc/landing/img/payment/visa.png" alt="icon"/>
+                                </div>
+                            </div>
+
+                            <div class="seperator"></div>
+                            <div class="payment-icon-block">
+                                <div class="payment-img">
+                                    <img src="/inc/landing/img/payment/mts.png" alt="icon"/>
+                                </div>
+                            </div>
+                            <div class="payment-icon-block">
+                                <div class="payment-img">
+                                    <img src="/inc/landing/img/payment/bilain.png" alt="icon"/>
+                                </div>
+                            </div>
+                            <div class="payment-icon-block">
+                                <div class="payment-img">
+                                    <img src="/inc/landing/img/payment/megaphone.png" alt="icon"/>
+                                </div>
+                            </div>
+                            <div class="payment-icon-block">
+                                <div class="payment-img">
+                                    <img src="/inc/landing/img/payment/tele2.png" alt="icon"/>
+                                </div>
+                            </div>
+                            <div class="seperator"></div>
+                            <div class="payment-icon-block">
+                                <div class="payment-img">
+                                    <img src="/inc/landing/img/payment/payeer.png" alt="icon"/>
+                                </div>
+                            </div>
+                            <div class="payment-icon-block">
+                                <div class="payment-img">
+                                    <img src="/inc/landing/img/payment/advcash.png" alt="icon"/>
+                                </div>
+                            </div>
+                            <div class="payment-icon-block">
+                                <div class="payment-img">
+                                    <img src="/inc/landing/img/payment/privatbank.png" alt="icon"/>
+                                </div>
+                            </div>
+                            <div class="payment-icon-block">
+                                <div class="payment-img">
+                                    <img src="/inc/landing/img/payment/visaworld.png" alt="icon"/>
+                                </div>
+                            </div>
+                            <a href="#" class="accept-payment-sixth wow fadeInUp">Принимать платежи</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- article sixth-screen -->
+
+        <!-- article seventh-screen -->
+        <article>
+            <div class="container-full-width background-seventh-screen wow fadeInUp">
+                <div class="wrapper">
+                    <div class="row">
+                        <div class="contacts">
+                            <div class="contacts-left wow fadeInLeft">
+                                <div id="form" class="form">
+                                    <h3>Подключайтесь!</h3>
+                                    {{ form_start(form, {'attr': {'id': 'form_contact'}}) }}
+                                    <ul id="email_errors" class="email_errors">
+                                    </ul>
+                                    {{ form_row(form.email, {'attr': {'class': 'input_form', 'size': 40, 'placeholder': 'Ваш Email*', 'required': 'required'}}) }}
+                                    <ul id="fullName_errors" class="fullName_errors">
+                                    </ul>
+                                    {{ form_row(form.fullName, {'attr': {'class': 'input_form', 'size': 40, 'placeholder': 'ФИО*', 'required': 'required'}}) }}
+                                    <ul id="site_errors" class="site_errors">
+                                    </ul>
+                                    {{ form_row(form.site, {'attr': {'class': 'input_form', 'size': 40, 'placeholder': 'Адрес сайта*', 'required': 'required'}}) }}
+                                    <ul id="form_errors" class="form_errors">
+                                    </ul>
+                                    <input id="submit-form-button" type="button" class="submit_form" value="Подключиться!">
+                                    {{ form_end(form) }}
+                                </div>
+                            </div>
+                            <div class="contacts-right wow fadeInRight">
+                                <div class="for_who">
+                                    <h4>Кому подходит?</h4>
+                                    <ul>
+                                        <li><i class="fas fa-user-tie"></i>Физическим лицам</li>
+                                        <li><i class="fas fa-shopping-basket"></i>Интернет-магазинам</li>
+                                        <li><i class="fas fa-building"></i>Финансовым компаниям</li>
+                                        <li><i class="fas fa-question-circle"></i>Для вашего варианта тоже есть решение
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- article seventh-screen -->
+
+    </section>
+    <!-- section -->
+
+    <!-- footer -->
+    <footer>
+        <div class="wrapper">
+            <div class="row">
+                <div class="footer">
+                    <div class="footer-menu">
+                        <h4>Продукты</h4>
+                        <ul>
+                            <li><a href="#">Массовые выплаты</a></li>
+                            <li><a href="#">Прием Онлайн платежей</a></li>
+                            <li><a target="_blank" href="https://primearea.biz">Создание Онлайн магазина</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-menu">
+                        <h4>Информация</h4>
+                        <ul>
+                            <li><a href="#tariff">Тарифы</a></li>
+                            <li><a href="#about">Наши преимущества</a></li>
+                            <li><a href="#">Способы оплаты</a></li>
+                            <li><a href="/doc">Документация</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="social-icons wow fadeInRight">
+                    <a href="/"><img src="/inc/landing/img/logo_footer.png" alt="logo" class="logo_footer"/></a>
+                    <a href="https://vk.com/primepayer" target="_blank"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-skype"></i></a>
+                    <p>Служба поддержки: admin@{{ domain }}</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer -->
+    <a href="#" class="back_to_top" title="Вернуться наверх"><i class="fas fa-arrow-up"></i></a>
+{% endblock %}

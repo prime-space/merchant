@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'site' %}
+
+{% block body %}
+    <a href="/doc">{% trans %}documentation{% endtrans %}</a>
+    {% if isSigned %}
+        {{ email }} <a href="/private">{% trans %}admin-panel{% endtrans %}</a> <a href="/signOut">{% trans %}logout{% endtrans %}</a>
+    {% else %}
+        {% if successSignUp is defined %}{% trans %}success-registration{% endtrans %}{% endif %}
+        {{ form_start(form) }}
+        {% if form.vars.errors|length > 0 %}
+            <ul>
+                {% for error in form.vars.errors %}
+                    <li>{{ error.message | trans(domain='validators') }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {{ form_row(form.email) }}
+        {{ form_row(form.pass) }}
+        {% if form.captcha is defined %}
+            <div>
+                <h3>{% trans %}enter-characters{% endtrans %}</h3>
+                <div>
+                    <img src="{{ captchaUrl }}" id='captchaImage'>
+                </div>
+                <a href="#" id="refreshCaptcha" onclick="refreshCaptcha()">
+                    {% trans %}refresh-image{% endtrans %}</a>
+                {{ form_row(form.captcha) }}
+            </div>
+        {% endif %}
+        {{ form_row(form.signIn) }}
+        {{ form_row(form.signUp) }}
+    {% endif %}
+    <div>
+        {% trans %}support{% endtrans %}: <a href="mailto:admin@primepayer.com">admin@primepayer.com</a>
+    </div>
+    {% block content %}{% endblock %}
+{% endblock %}
+
+{% block title %}{% endblock %}
+
+{% block stylesheets %}
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        refreshCaptcha = function () {
+            document.getElementById('captchaImage').src = '/captcha?' + Math.random();
+        };
+        let captchaInput = document.getElementById('form_captcha');
+        if (captchaInput !== null) {
+            captchaInput.value = '';
+        }
+    </script>
+{% endblock %}

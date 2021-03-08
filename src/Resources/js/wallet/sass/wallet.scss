@@ -1,0 +1,88 @@
+$loading-background-color: #65d878;
+$loading-spinner-color: #fff;
+
+@import "./../../../sass/loading.scss";
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #F8F9FA;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.content {
+  flex: 1 0 auto;
+  max-width: 1110px;
+  margin: 35px auto 0;
+}
+
+@media screen and (max-width: 1170px) {
+  html, body {
+    overflow-y: visible;
+  }
+  .content {
+    width: 90%;
+    max-width: 800px;
+  }
+}
+
+.main {
+  margin-top: 35px;
+}
+
+.footer {
+  flex: 0 0 auto;
+}
+
+.bounce-enter-active, .bounce-leave-active {
+  transition: all .3s;
+}
+
+.bounce-enter, .bounce-leave-to {
+  transform: scale(0.5)
+}
+
+@media screen and (max-width: 1170px) {
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 1170px) {
+  .desktop {
+    display: block;
+  }
+
+  .mobile {
+    display: none;
+  }
+}
+
+.wrapper {
+  width: 1110px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.side-panel {
+  margin-left: 10px;
+}
+
+@media screen and (max-width: 1170px) {
+  .wrapper {
+    width: 100%;
+  }
+}

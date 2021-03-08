@@ -1,0 +1,246 @@
+index:
+    path: /
+    controller: App\Controller\IndexController::index
+refundInfo:
+    path: /refund-info
+    controller: App\Controller\IndexController::refundInfo
+login:
+    path: /login
+    controller: App\Controller\IndexController::loginOrRegister
+    defaults: {action: 'login'}
+registration:
+    path: /registration
+    controller: App\Controller\IndexController::loginOrRegister
+    defaults: {action: 'reg'}
+connect:
+    path: /connect
+    controller: App\Controller\IndexController::connect
+    methods: [POST]
+doc:
+    path: /doc
+    controller: App\Controller\IndexController::doc
+captcha:
+    path: /captcha
+    controller: App\Controller\IndexController::captcha
+    methods: [GET]
+signOut:
+    path: /signOut
+    controller: App\Controller\IndexController::signOut
+confirmEmail:
+    path: /confirmEmail/{code}
+    controller: App\Controller\IndexController::confirmEmail
+addingYandexAccount:
+    path: /addingYandexAccount
+    controller: App\Controller\IndexController::addingYandexAccount
+
+admin_api:
+    path: /sf/adminApi/{method}
+    defaults:
+        _controller: App\Controller\AdminApiController::action
+    methods: [GET,POST]
+admin_api.entityId:
+    path: /sf/adminApi/{method}/{id}
+    defaults:
+        _controller: App\Controller\AdminApiController::action
+    methods: [GET,POST]
+
+client_api:
+    path: /api/{userId}/{method}
+    defaults:
+        _controller: App\Controller\ClientApiController::action
+    methods: [POST,GET]
+    requirements: {userId: '\d+'}
+
+
+admin:
+    path: /admin
+    controller: App\Controller\IndexController::admin
+private:
+    path: /private
+    controller: App\Controller\IndexController::private
+private.lkMode:
+    path: /private/lkMode/{mode}
+    controller: App\Controller\UserController::lkMode
+    methods: [POST]
+    requirements: {mode: 'merchant|purse'}
+private.shops:
+    path: /private/shops
+    controller: App\Controller\ShopController::shops
+    methods: [GET]
+private.shop:
+    path: /private/shop/{id}
+    controller: App\Controller\ShopController::shop
+    methods: [POST]
+    defaults: {id: null}
+    requirements: {id: '\d+'}
+private.shopInfo:
+    path: /private/shop/{id}
+    controller: App\Controller\ShopController::shopInfo
+    methods: [GET]
+    requirements: {id: '\d+'}
+private.shop.toChecking:
+    path: /private/shop/{id}/toChecking
+    controller: App\Controller\ShopController::toChecking
+    methods: [POST]
+    requirements: {id: '\d+'}
+private.shop.paymentMethods:
+    path: /private/shop/{id}/paymentMethods
+    controller: App\Controller\ShopController::paymentMethods
+    methods: [POST]
+    requirements: {id: '\d+'}
+private.shop.postback:
+    path: /private/shop/{id}/postback
+    controller: App\Controller\ShopController::postback
+    methods: [POST]
+    requirements: {id: '\d+'}
+
+private.payments:
+    path: /private/payments/{shopId}/{limit}/{pageId}
+    controller: App\Controller\PaymentController::payments
+    methods: [GET]
+    requirements: {shopId: '\d+', pageId: '\d+', limit: '\d+'}
+private.successPayment:
+    path: /private/payment/{paymentId}
+    controller: App\Controller\PaymentController::payment
+    methods: [GET]
+    requirements: {paymentId: '\d+'}
+private.payments.getPaymentStatisticChartData:
+    path: /private/payments/chartData/{shopId}
+    controller: App\Controller\PaymentController::getPaymentStatisticChartData
+    methods: [GET]
+    defaults: {shopId: null}
+    requirements: {shopId: '\d+'}
+private.payouts:
+    path: /private/payouts/{limit}/{pageId}
+    controller: App\Controller\PayoutController::payouts
+    methods: [POST]
+    requirements: {pageId: '\d+', limit: '\d+'}
+private.payout:
+    path: /private/payout
+    controller: App\Controller\PayoutController::payout
+    methods: [POST]
+private.tickets:
+    path: /private/tickets
+    controller: App\Controller\TicketController::tickets
+    methods: [GET]
+private.ticket:
+    path: /private/ticket
+    controller: App\Controller\TicketController::ticket
+    methods: [POST]
+private.ticket.messages:
+    path: /private/ticket/{ticketId}
+    controller: App\Controller\TicketController::messages
+    methods: [GET]
+    requirements: {ticketId: '\d+'}
+private.ticket.message:
+    path: /private/ticket/message
+    controller: App\Controller\TicketController::message
+    methods: [POST]
+private.transactions:
+    path: /private/transactions/{fromTransactionId}
+    controller: App\Controller\TransactionController::transactions
+    methods: [GET]
+    requirements: {fromTransactionId: '\d+'}
+private.voucher:
+    path: /private/voucher
+    controller: App\Controller\VoucherController::voucher
+    methods: [POST]
+
+merchant.payment:
+    path: /pay
+    controller: App\Controller\MerchantController::payment
+    methods: [POST]
+merchant.masked-payment:
+    path: /masked/payment
+    controller: App\Controller\MerchantController::maskedPayment
+    methods: [POST]
+merchant.masked-payment-status:
+    path: /masked/payment/{hash}/status
+    controller: App\Controller\MerchantController::maskedPaymentStatus
+    methods: [POST]
+merchant.masked-payment-mobile:
+    path: /masked/payment/{hash}/mobile
+    controller: App\Controller\MerchantController::maskedPaymentMobile
+    methods: [POST]
+merchant.masked-payment-card:
+    path: /masked/payment/{hash}/card
+    controller: App\Controller\MerchantController::maskedPaymentCard
+    methods: [POST]
+merchant.masked-payment-retry:
+    path: /masked/payment/{hash}/retry
+    controller: App\Controller\MerchantController::maskedPaymentRetry
+    methods: [POST]
+merchant.masked-payment-alternative:
+    path: /masked/payment/{hash}/alternative
+    controller: App\Controller\MerchantController::maskedPaymentAlternative
+    methods: [POST]
+merchant.exchanger-payment:
+    path: /exchanger/payment/{hash}
+    controller: App\Controller\MerchantController::exchangerPayment
+    methods: [GET]
+merchant.payment-by-hash:
+    path: /payment/{hash}
+    controller: App\Controller\MerchantController::paymentByHash
+    methods: [GET, POST]
+merchant.payment-by-hash.error:
+    path: /payment/{hash}/error
+    controller: App\Controller\MerchantController::paymentByHashError
+    methods: [GET, POST]
+merchant.select-method:
+    path: /payment/{hash}/selectMethod/{paymentMethodId}
+    controller: App\Controller\MerchantController::selectMethod
+    methods: [POST]
+    requirements: {paymentMethodId: '\d+'}
+merchant.self-form:
+    path: /payment/{hash}/selfForm/{paymentMethodId}
+    controller: App\Controller\MerchantController::selfForm
+    methods: [POST]
+    requirements: {paymentMethodId: '\d+'}
+merchant.set-email:
+    path: /payment/{hash}/setEmail
+    controller: App\Controller\MerchantController::setEmail
+    methods: [POST]
+merchant.payment-status:
+    path: /payment/{hash}/status
+    controller: App\Controller\MerchantController::status
+    methods: [GET]
+merchant.return:
+    path: /result/{paymentSystemName}/{method}/{paymentShotId}
+    controller: App\Controller\MerchantController::return
+    methods: [POST, GET]
+    requirements: {method: 'success|fail'}
+    defaults: {paymentShotId: null}
+merchant.result:
+    path: /result/{paymentSystemName}
+    controller: App\Controller\MerchantController::result
+    methods: [POST,GET]
+merchant.help:
+    path: /help
+    controller: App\Controller\MerchantController::help
+    methods: [POST]
+merchant.shop-payment-methods:
+    path: /shopPaymentMethods/{shopId}
+    controller: App\Controller\MerchantController::shopPaymentMethods
+    methods: [GET]
+    requirements: {shopId: '\d+'}
+
+settings.apiIps:
+    path: /settings/apiIps
+    controller: App\Controller\SettingsController::api
+    methods: [POST]
+settings.password:
+    path: /settings/password
+    controller: App\Controller\SettingsController::password
+    methods: [POST]
+settings.timezone:
+    path: /settings/timezone
+    controller: App\Controller\SettingsController::timezone
+    methods: [POST]
+settings.timezones:
+    path: /settings/timezones
+    controller: App\Controller\SettingsController::timezones
+    methods: [GET]
+
+gamemoney.payout:
+    path: /result/gamemoney/payout
+    controller: App\Controller\IndexController::gamemoneyPayoutStub

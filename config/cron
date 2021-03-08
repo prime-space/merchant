@@ -1,0 +1,8 @@
+SHELL=/bin/bash
+MAILTO=""
+*/5 * * * * /usr/bin/php /var/www/prod/bin/console currency:sync --no-debug --env=prod
+* * * * * /usr/bin/php /var/www/prod/bin/console user:clear-sessions --no-debug --env=prod
+* * * * * /usr/bin/php /var/www/prod/bin/console ip-control:clear --no-debug --env=prod
+0 0 1 * * /usr/bin/php /var/www/prod/bin/console sessions:clear --no-debug --env=prod
+0 * * * * /usr/bin/php /var/www/prod/bin/console message-broker:optimize-queue-tables --no-debug --env=prod
+* * * * * /usr/bin/php /var/www/prod/bin/console bitcoin:check-transactions --no-debug --env=prod

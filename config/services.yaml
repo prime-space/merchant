@@ -1,0 +1,354 @@
+imports:
+    - { resource: services/daemon.yaml}
+    - { resource: services/command.yaml}
+    - { resource: services/controller.yaml}
+    - { resource: services/payment-system-manager.yaml}
+    - { resource: services/transaction-method.yaml}
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    env: '%env(APP_ENV)%'
+    locale: 'en'
+    secret: '%env(APP_SECRET)%'
+    domain: '%env(DOMAIN)%'
+    site_name: '%env(SITE_NAME)%'
+    proxies: '%env(json:PROXIES)%'
+    telegram_chat_id: '%env(TELEGRAM_CHAT_ID)%'
+    telegram_bot_token: '%env(TELEGRAM_BOT_TOKEN)%'
+    admin_domain: '%env(ADMIN_DOMAIN)%'
+    service_secret: '%env(ADMIN_API_SECRET)%'
+    is_white_balancing_enabled: '%env(IS_WHITE_BALANCING_ENABLED)%'
+    app_key: '%env(APP_KEY)%'
+    mailer_host: '%env(MAILER_HOST)%'
+    mailer_port: '%env(int:MAILER_PORT)%'
+    mailer_secure: '%env(MAILER_SECURE)%'
+    mailer_user: '%env(MAILER_USER)%'
+    mailer_pass: '%env(MAILER_PASS)%'
+    mailer_smtp_auth: '%env(bool:MAILER_SMTP_AUTH)%'
+    mailer_sender_email: '%env(MAILER_SENDER_EMAIL)%'
+    mailer_sender_name: '%env(MAILER_SENDER_NAME)%'
+    email_address_claims: '%env(EMAIL_ADDRESS_CLAIMS)%'
+    rabbitmq_host: '%env(RABBITMQ_HOST)%'
+    rabbitmq_user: '%env(RABBITMQ_USER)%'
+    rabbitmq_pass: '%env(RABBITMQ_PASS)%'
+    rabbitmq_vhost: '%env(RABBITMQ_VHOST)%'
+    recaptcha_key1: '%env(RECAPTCHA_KEY1)%'
+    recaptcha_key2: '%env(RECAPTCHA_KEY2)%'
+    sentry_dsn: '%env(SENTRY_DSN)%'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false       # Allows optimizing the container by removing unused services; this also means
+                            # fetching services directly from the container via $container->get() won't work.
+                            # The best practice is to be explicit about your dependencies anyway.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{Entity,Migration,Tests,Kernel.php,Dto,Repository,PaymentSystemManager,Daemon,Command,Controller,Constraints,Consumer,FastDbLogger,Transaction}'
+
+    App\Repository\:
+        resource: '../src/Repository'
+        tags: ['repositories']
+
+    App\Repository\PaymentMethodRepository:
+        arguments: ['@ewll.db.repository-provider']
+        tags: ['repositories']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    App\EventSubscriber\SignSubscriber:
+        arguments: ['@App\Authenticator']
+        tags: ['kernel.event_subscriber']
+
+    App\Authenticator:
+        arguments:
+        - '@ewll.db.repository-provider'
+        - '%domain%'
+        - '@translator'
+        - '@twig'
+        - '@router.default'
+        - '@App\Mailer'
+        - '@ewll.db.client.default'
+
+    App\Accountant:
+        arguments:
+            - '@ewll.db.repository-provider'
+            - '@App\MessageBroker'
+            - '@ewll.db.client.default'
+            - '@translator'
+            - '@App\FeeFetcher'
+            - '@form.factory'
+            - '@App\Authenticator'
+            - '@App\TagServiceProvider\TagServiceProvider'
+            - !tagged payment_system_manager
+            - '@App\Form\Extension\Core\DataTransformer\PayoutMethodCodeToIdTransformer'
+            - '@logger'
+
+    App\PaymentAccountant:
+        arguments:
+        - '@ewll.db.repository-provider'
+        - '@logger'
+        - '@App\TelegramSender'
+        - '@App\AdminApi'
+
+    App\FastDbLogger:
+        arguments:
+        - '@ewll.db.repository-provider'
+
+    App\CurrencyConverter:
+        arguments: ['@ewll.db.repository-provider']
+
+    App\AdminApi:
+        arguments:
+        - '@ewll.db.repository-provider'
+        - '@GuzzleHttp\Client'
+        - '%admin_domain%'
+        - '%service_secret%'
+        - '@logger'
+        - '@translator'
+        - '@form.factory'
+        - '@App\ApiViewCompiler'
+        - '@ewll.db.client.default'
+        - '@App\TagServiceProvider\TagServiceProvider'
+        - !tagged payment_system_manager
+        - '@App\MessageBroker'
+        - '@App\FeeFetcher'
+        - '@App\Mailer'
+        - '%domain%'
+        - '@App\PaymentDayStatisticCounter'
+        - '@App\ChartDataCompiler'
+        - '@App\Accountant'
+        - '@App\PaymentRefunder'
+        tags:
+            - { name: monolog.logger, channel: admin_api }
+
+    App\ClientApi:
+        arguments:
+            - '@ewll.db.repository-provider'
+            - '@App\Accountant'
+            - '@App\TagServiceProvider\TagServiceProvider'
+            - !tagged payment_system_manager
+            - '@form.factory'
+            - '@logger'
+            - '@App\Authenticator'
+        tags:
+            - { name: monolog.logger, channel: test }
+
+    App\Mailer:
+        arguments:
+        - '@App\MessageBroker'
+        - '@PHPMailer\PHPMailer\PHPMailer'
+        - '@ewll.db.repository-provider'
+        - '@translator'
+        - '@twig'
+        - '@logger'
+        - '%mailer_host%'
+        - '%mailer_port%'
+        - '%mailer_secure%'
+        - '%mailer_user%'
+        - '%mailer_pass%'
+        - '%mailer_smtp_auth%'
+        - '%mailer_sender_email%'
+        - '%mailer_sender_name%'
+        tags:
+            - { name: monolog.logger, channel: mailer }
+
+    App\PaymentAccountFetcher:
+        arguments: ['@ewll.db.repository-provider']
+
+    App\MessageBroker:
+        arguments: ['@ewll.db.client.queue', '@logger']
+
+    App\Payout\Processor\PayoutProcessor:
+        arguments:
+            - '@logger'
+            - '@ewll.db.repository-provider'
+            - '@App\TagServiceProvider\TagServiceProvider'
+            - !tagged payment_system_manager
+            - '@ewll.db.client.default'
+            - '@App\Accountant'
+            - '@App\TelegramSender'
+        tags:
+            - { name: monolog.logger, channel: payout }
+
+    App\Logger\GlobalLogProcessor:
+        autowire: true
+        arguments: ['@App\Logger\LogExtraDataKeeper']
+        tags: [{ name: monolog.processor, method: processRecord }]
+
+    GuzzleHttp\Client: []
+
+    PHPMailer\PHPMailer\PHPMailer: []
+
+    App\CaptchaProvider:
+       arguments: ['@ewll.db.repository-provider', '@App\SessionRegistry','@request_stack']
+
+    App\SessionRegistry:
+       arguments: ['@ewll.db.repository-provider', '%domain%']
+
+    App\IpControlAttemptProvider:
+       arguments: ['@ewll.db.repository-provider', '@logger']
+
+    App\TelegramSender:
+       arguments: ['%domain%', '@App\MessageBroker', '@GuzzleHttp\Client', '%telegram_chat_id%', '%telegram_bot_token%']
+
+    App\Recaptcha:
+        arguments: ['@GuzzleHttp\Client', '%recaptcha_key2%', '@logger']
+        tags: [{ name: monolog.logger, channel: auth }]
+
+    App\VueViewCompiler:
+       arguments: []
+
+    App\ApiViewCompiler:
+       arguments: []
+
+    App\PaymentRefunder:
+        arguments:
+            - '@ewll.db.repository-provider'
+            - '@logger'
+            - '@ewll.db.client.default'
+            - '@App\Accountant'
+            - '@App\Mailer'
+            - '@form.factory'
+            - '@App\VoucherManager'
+            - '%domain%'
+        tags:
+            - { name: monolog.logger, channel: refund_payment }
+
+    App\VoucherManager:
+        arguments:
+            - '@ewll.db.repository-provider'
+            - '@logger'
+            - '@ewll.db.client.default'
+            - '@App\Accountant'
+        tags:
+            - { name: monolog.logger, channel: voucher }
+
+    App\FeeFetcher:
+        arguments: ['@ewll.db.repository-provider']
+
+    App\ChartDataCompiler:
+        arguments: ['@App\CurrencyConverter', '@ewll.db.repository-provider']
+
+    App\Form\Extension\Core\DataTransformer\PayoutMethodCodeToIdTransformer:
+        arguments: ['@ewll.db.repository-provider']
+
+    App\PaymentDayStatisticCounter:
+        arguments:
+        - '@App\CurrencyConverter'
+        - '@ewll.db.repository-provider'
+
+    App\Constraints\CurrencyValidator:
+        arguments: ['@ewll.db.repository-provider']
+
+    App\Constraints\AccountValidator:
+        arguments: ['@ewll.db.repository-provider', '@App\Authenticator']
+
+    App\Constraints\ViaValidator:
+        arguments: ['@ewll.db.repository-provider']
+
+    App\Constraints\PaymentSignValidator:
+        arguments: ['@ewll.db.repository-provider', '@request_stack']
+
+    App\Constraints\VoucherValidator:
+        arguments: ['@ewll.db.repository-provider']
+
+    App\Constraints\ShopUrlChangeValidator:
+        arguments: ['@ewll.db.repository-provider', '@request_stack']
+
+    App\Constraints\CaptchaValidator:
+       arguments: ['@App\CaptchaProvider']
+
+    App\Constraints\PasswordValidator:
+       arguments: ['@App\Authenticator']
+
+    App\Constraints\PayoutMethodValidator:
+       arguments:
+           - '@ewll.db.repository-provider'
+           - '@App\TagServiceProvider\TagServiceProvider'
+           - !tagged payment_system_manager
+           - '@App\Authenticator'
+
+    App\Constraints\UserBlockValidator:
+       arguments: ['@App\Authenticator']
+
+    App\Constraints\ShopDomainMatchValidator: []
+
+    App\Constraints\PayoutReceiverValidator:
+       arguments:
+           - '@ewll.db.repository-provider'
+           - '@App\TagServiceProvider\TagServiceProvider'
+           - !tagged payment_system_manager
+
+    App\Constraints\PayoutInternalUsersIdValidator:
+       arguments: ['@App\Authenticator', '@ewll.db.repository-provider']
+
+    App\PostbackManager:
+        arguments:
+            - '@ewll.db.repository-provider'
+            - '@logger'
+            - '@GuzzleHttp\Client'
+            - '@old_sound_rabbit_mq.postback_producer'
+        tags:
+            - { name: monolog.logger, channel: postback }
+
+    yandex_transaction_consumer:
+        class: App\Consumer\YandexTransactionConsumer
+        arguments:
+            - '@logger'
+            - '@GuzzleHttp\Client'
+            - '@App\PaymentSystemManager\YandexManager'
+            - '@App\Logger\LogExtraDataKeeper'
+            - '@ewll.db.repository-provider'
+            - '@App\MessageBroker'
+            - '@old_sound_rabbit_mq.yandex_transactions_producer'
+        tags:
+            - { name: monolog.logger, channel: yandex }
+
+    postback_consumer:
+        class: App\Consumer\PostbackConsumer
+        arguments:
+            - '@App\Logger\LogExtraDataKeeper'
+            - '@App\PostbackManager'
+
+
+old_sound_rabbit_mq:
+    connections:
+        default:
+            host: '%rabbitmq_host%'
+            user: '%rabbitmq_user%'
+            password: '%rabbitmq_pass%'
+            vhost: '%rabbitmq_vhost%'
+            lazy: true
+    producers:
+        yandex_transactions:
+            connection: default
+            exchange_options:
+                name: yandex_transactions
+                type: x-delayed-message
+        postback:
+            connection: default
+            exchange_options:
+                name: postback
+                type: x-delayed-message
+    consumers:
+        yandex_transactions:
+            connection:       default
+            exchange_options: {name: 'yandex_transactions', type: x-delayed-message}
+            queue_options:    {name: 'yandex_transactions'}
+            callback:         yandex_transaction_consumer
+        postback:
+            connection:       default
+            exchange_options: {name: 'postback', type: x-delayed-message}
+            queue_options:    {name: 'postback'}
+            callback:         postback_consumer
+
+sentry:
+    dsn: '%sentry_dsn%'

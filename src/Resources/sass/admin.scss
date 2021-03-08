@@ -1,0 +1,12 @@
+$loading-background-color: #3f51b5;
+$loading-spinner-color: #fff;
+
+@import "loading.scss";
+
+.vContainerNoPadding {
+  padding: 0!important;
+}
+
+.idBox {
+  line-height: 38px;
+}

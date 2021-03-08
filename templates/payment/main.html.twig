@@ -1,0 +1,59 @@
+{% extends 'payment/base.html.twig' %}
+{% trans_default_domain 'payment' %}
+
+{% block headerDesctopPaymentData %}
+<div class="status">
+    <div class="status_block" title="Описание: {{ payment.description }}"><i class="status_icon"></i>Описание: {{ payment.description }}</div>
+    <div class="status_block"><i class="status_icon"></i>Счет №: {{ payment.id }}</div>
+</div>
+<div class="price">
+<p>{{ payment.amount }}<span clas="currency">{{ currencyShortLatin }}</span></p>
+</div>
+{% endblock %}
+
+{% block headerMobilePaymentData %}
+<div class="right">
+    <div class="price padding-mobile-header">
+        <p>{{ payment.amount }}<span clas="currency">{{ currencyShortLatin }}</span></p>
+    </div>
+    <div class="open_info_click">
+        <i class="fas fa-chevron-down"></i>
+        <hr class="mobile-menu">
+    </div>
+    <div class="status padding-mobile-header">
+        <div class="status_block"><i class="status_icon"></i>Описание: {{ payment.description }}</div>
+        <div class="status_block"><i class="status_icon"></i>Счет №: {{ payment.id }}</div>
+    </div>
+</div>
+{% endblock %}
+
+{% block shopPrivacy %}
+<div class="privacy padding">
+    Пожалуйста, примите к сведению, что платеж совершается в пользу магазина.
+</div>
+{% endblock %}
+
+{% block pages %}
+<div class="page-methods">
+    <div class="methods"></div>
+    <p class="payment_title">Выберите способ оплаты</p>
+    <div class="payment-block">
+        {% for method in methods %}
+            <div
+                    class="payment-method paymentMethod"
+                    data-id="{{ method.id }}"
+                    data-is-group="{{ method.isGroup }}"
+                    data-img="/inc/img/paymentMethod/{{ method.img }}.png"
+                    data-name="{{ method.name }}"
+                    {% if method.isGroup %}
+                        data-methods="{{ method.methods|json_encode() }}"
+                    {% endif %}
+            >
+                <div class="payment-method-img">
+                    <img src="/inc/img/paymentMethod/{{ method.img }}.png" alt="{{ method.name }}" title="{{ method.name }}">
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

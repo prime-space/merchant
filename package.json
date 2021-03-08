@@ -1,0 +1,50 @@
+{
+  "name": "merchant",
+  "main": "index.js",
+  "private": true,
+  "dependencies": {
+    "card-info": "^1.2.4",
+    "vue-multilanguage": "3.0.5",
+    "vue-resource": "^1.5.0",
+    "vue-router": "^3.0.1",
+    "vue-template-compiler": "^2.3.4",
+    "vuex": "^3.0.1",
+    "webpack": "^4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.17",
+    "@fortawesome/free-solid-svg-icons": "^5.8.1",
+    "@fortawesome/vue-fontawesome": "^0.1.6",
+    "autoprefixer": "^9.5.0",
+    "babel-loader": "^8.0.5",
+    "babel-polyfill": "^6.26.0",
+    "css-loader": "^0.25.0",
+    "file-loader": "^0.9.0",
+    "mini-css-extract-plugin": "^0.5.0",
+    "node-sass": "^3.10.0",
+    "postcss-loader": "^3.0.0",
+    "precss": "^4.0.0",
+    "prismjs": "^1.16.0",
+    "resolve-url-loader": "^1.6.0",
+    "sass-loader": "^4.0.2",
+    "scss-loader": "0.0.1",
+    "style": "0.0.3",
+    "style-loader": "^0.13.1",
+    "timezone-js": "^0.4.13",
+    "tzdata": "^1.0.16",
+    "uglifyjs-webpack-plugin": "^2.1.2",
+    "vue-devtools": "^3.1.9",
+    "vue-loader": "^15.7.0",
+    "vue-prism-component": "^1.1.1",
+    "vue-slide-up-down": "^1.7.2",
+    "vue-snack": "^0.1.4",
+    "vue-style-loader": "^4.1.2",
+    "webpack-cli": "^3.3.0"
+  },
+  "scripts": {
+    "dev": "WEBPACK_ENV=dev NODE_ENV=dev ./node_modules/.bin/webpack --mode development --watch",
+    "prod": "WEBPACK_ENV=prod NODE_ENV=production ./node_modules/.bin/webpack --mode production"
+  }
+}

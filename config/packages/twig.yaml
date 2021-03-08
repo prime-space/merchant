@@ -1,0 +1,9 @@
+twig:
+    paths: ['%kernel.project_dir%/templates']
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    globals:
+        version: '%env(APP_VERSION)%'
+        domain: '%domain%'
+        recaptcha_key1: '%env(RECAPTCHA_KEY1)%'
+        env: '%env%'
